@@ -1,0 +1,2217 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BBS Store | Prévia para aprovação</title>
+  <meta name="description" content="Camisetas personalizadas de futebol, futsal, goleiro, gamer e pet. Coloque nome, número e foto. Parcele em até 6x sem juros ou ganhe 5% no Pix.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700;800&family=Kaushan+Script&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   BBS Store: estilos
+   Primeira versão com fundo branco, dourado e laranja como destaque
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-2: #f6f5f2;
+  --card: #ffffff;
+  --line: #e5e3dd;
+  --text: #16150f;
+  --muted: #66625a;
+  --gold: #c26d00;
+  --gold-2: #ff7a1a;
+  --grad: linear-gradient(135deg, #f9b233 0%, #f5961f 45%, #ff6a13 100%);
+  --ok: #178a4c;
+  --err: #d3352c;
+  --radius: 14px;
+  --shadow: 0 10px 30px #0000001f;
+  --font: 'Inter', system-ui, sans-serif;
+  --display: 'Anton', Impact, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+img, svg { max-width: 100%; display: block; }
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: .5px; line-height: 1.05; margin: 0 0 .5em; }
+h1 { font-size: clamp(34px, 6vw, 64px); }
+h2 { font-size: clamp(26px, 4vw, 38px); }
+h3 { font-size: 22px; }
+.muted { color: var(--muted); }
+.wrap { width: min(1200px, 100% - 32px); margin-inline: auto; }
+.gold { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.app { min-height: 60vh; outline: none; }
+
+/* ---------- topo ---------- */
+.demo-bar { background: #fff4e6; color: #8a4f00; text-align: center; font-size: 12.5px; font-weight: 600; padding: 7px 12px; border-bottom: 1px solid #f5b23c44; }
+.topbar { background: var(--grad); color: #1a0f00; font-weight: 700; font-size: 12.5px; display: flex; justify-content: center; gap: 10px; padding: 7px 12px; flex-wrap: wrap; text-align: center; }
+.topbar .sep { opacity: .5; }
+.header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: #ffffffee; backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.header-in { display: flex; align-items: center; gap: 18px; height: 68px; }
+.logo-img { width: 54px; height: 54px; border-radius: 50%; display: block; flex: none; }
+.logo-img.small { width: 46px; height: 46px; }
+.nav { display: flex; gap: 4px; }
+.nav a { padding: 8px 12px; border-radius: 999px; font-weight: 600; font-size: 14px; color: var(--muted); transition: .2s; }
+.nav a:hover, .nav a.active { color: var(--text); background: var(--bg-2); }
+.search { margin-left: auto; flex: 0 1 240px; }
+.search input { width: 100%; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; outline: none; }
+.search input:focus { border-color: var(--gold); }
+.header-actions { display: flex; gap: 6px; }
+.icon-btn { background: none; border: 0; cursor: pointer; font-size: 20px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; position: relative; }
+.icon-btn:hover { background: var(--bg-2); }
+.menu-btn { display: none; }
+.cart-count { position: absolute; top: 2px; right: 0; background: var(--grad); color: #000; font-size: 11px; font-weight: 800; min-width: 19px; height: 19px; border-radius: 999px; display: grid; place-items: center; padding: 0 5px; }
+.cart-count.bump { animation: bump .4s; }
+@keyframes bump { 50% { transform: scale(1.4); } }
+
+/* ---------- botões e formulários ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; cursor: pointer; padding: 14px 24px; border-radius: 999px; font-weight: 800; letter-spacing: .3px; transition: transform .15s, filter .2s, background .2s; text-align: center; }
+.btn:active { transform: scale(.98); }
+.btn-gold { background: var(--grad); color: #1a0f00; box-shadow: 0 8px 24px #ff7a1a33; }
+.btn-gold:hover { filter: brightness(1.08); }
+.btn-ghost { background: transparent; border: 1.5px solid var(--line); color: var(--text); }
+.btn-ghost:hover { border-color: var(--gold); }
+.btn-wpp { background: #25d366; color: #052e14; }
+.btn-block { width: 100%; }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field label { font-size: 13px; font-weight: 600; color: var(--muted); }
+.field input, .field select, .field textarea { background: var(--bg-2); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; outline: none; width: 100%; transition: border-color .2s; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); }
+.field.invalid input, .field.invalid select { border-color: var(--err); }
+.field .err { color: var(--err); font-size: 12px; display: none; }
+.field.invalid .err { display: block; }
+.row { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.row-3 { display: grid; gap: 12px; grid-template-columns: 2fr 1fr 1fr; }
+.pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 800; letter-spacing: .4px; text-transform: uppercase; background: var(--grad); color: #1a0f00; }
+.pill.dark { background: #16150f; color: #f9b233; border: 1px solid #f5b23c55; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(800px 400px at 80% 30%, #ff7a1a22, transparent 60%), radial-gradient(600px 300px at 10% 90%, #f5b23c14, transparent 60%); }
+.hero-in { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; padding: 64px 0; }
+.hero p.lead { font-size: 18px; color: var(--muted); max-width: 480px; margin: 0 0 26px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-tees { position: relative; height: 420px; }
+.hero-tees .t { position: absolute; width: 58%; filter: drop-shadow(0 20px 30px #0004); transition: transform .4s; }
+.hero-tees .t1 { left: 0; top: 30px; transform: rotate(-8deg); }
+.hero-tees .t2 { right: 0; top: 0; transform: rotate(6deg); z-index: 2; }
+.hero-tees .t3 { left: 22%; bottom: -30px; transform: rotate(-2deg) scale(.9); z-index: 1; }
+.hero-tees:hover .t1 { transform: rotate(-12deg) translateX(-10px); }
+.hero-tees:hover .t2 { transform: rotate(10deg) translateX(10px); }
+.hero-stats { display: flex; gap: 28px; margin-top: 32px; }
+.hero-stats b { font-family: var(--display); font-size: 28px; display: block; }
+.hero-stats span { color: var(--muted); font-size: 13px; }
+
+/* ---------- seções ---------- */
+.section { padding: 56px 0; }
+.section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.section-head p { margin: 0; color: var(--muted); }
+.cats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.cat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 12px; text-align: center; transition: .2s; }
+.cat:hover { border-color: var(--gold); transform: translateY(-3px); }
+.cat .e { font-size: 30px; display: block; margin-bottom: 6px; }
+.cat b { font-family: var(--display); font-size: 18px; font-weight: 400; letter-spacing: .5px; }
+
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: .25s; position: relative; }
+.card:hover { border-color: #f5b23c66; transform: translateY(-4px); box-shadow: var(--shadow); }
+.card .media { background: radial-gradient(circle at 50% 40%, #fbfaf7, #eeece6); aspect-ratio: 1; display: grid; place-items: center; padding: 18px; position: relative; }
+.card .media svg { width: 100%; transition: transform .4s; }
+.card:hover .media svg { transform: scale(1.05); }
+.card .tags { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; flex-wrap: wrap; z-index: 2; }
+.card .body { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card .name { font-weight: 700; font-size: 15px; }
+.price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.price .now { font-weight: 800; font-size: 19px; }
+.price .old { color: var(--muted); text-decoration: line-through; font-size: 13px; }
+.price-pix { color: var(--ok); font-size: 12.5px; font-weight: 600; }
+.price-parc { color: var(--muted); font-size: 12.5px; }
+.swatches { display: flex; gap: 6px; margin-top: auto; padding-top: 6px; }
+.swatch { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #0003; }
+
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; counter-reset: s; }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; position: relative; }
+.step::before { counter-increment: s; content: counter(s); font-family: var(--display); font-size: 44px; line-height: 1; display: block; margin-bottom: 10px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.step b { display: block; margin-bottom: 4px; }
+.step p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.banner-team { border-radius: 20px; padding: 40px; background: linear-gradient(120deg, #fff6ea, #ffe8cf); border: 1px solid #f5b23c44; display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: center; }
+.banner-team p { color: var(--muted); }
+
+.trust { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.trust div { display: flex; gap: 12px; align-items: center; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-2); }
+.trust .e { font-size: 26px; }
+.trust b { display: block; font-size: 14px; }
+.trust span { color: var(--muted); font-size: 12.5px; }
+.trust div > div { min-width: 0; padding: 0; border: 0; background: none; display: block; }
+
+/* ---------- listagem ---------- */
+.list-head { padding: 36px 0 12px; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+.chip { padding: 8px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-weight: 600; font-size: 13.5px; cursor: pointer; }
+.chip.active, .chip:hover { border-color: var(--gold); color: var(--gold); }
+.filters select { margin-left: auto; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; }
+.empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+.empty .e { font-size: 48px; display: block; margin-bottom: 10px; }
+
+/* ---------- produto ---------- */
+.crumbs { padding: 20px 0; font-size: 13px; color: var(--muted); }
+.crumbs a:hover { color: var(--gold); }
+.pdp { display: grid; grid-template-columns: 1.05fr 1fr; gap: 44px; padding-bottom: 60px; }
+.gallery { position: sticky; top: 90px; align-self: start; }
+.gallery .stage { background: radial-gradient(circle at 50% 40%, #fbfaf7, #eeece6 75%); border: 1px solid var(--line); border-radius: 20px; padding: 36px; aspect-ratio: 1; display: grid; place-items: center; position: relative; }
+.gallery .stage svg { width: 92%; filter: drop-shadow(0 18px 24px #0004); }
+.gallery .live { position: absolute; top: 14px; right: 14px; }
+.thumbs { display: flex; gap: 10px; margin-top: 12px; }
+.thumb { width: 84px; aspect-ratio: 1; padding: 8px; background: var(--card); border: 1.5px solid var(--line); border-radius: 12px; cursor: pointer; }
+.thumb.active { border-color: var(--gold); }
+.thumb small { display: block; text-align: center; font-size: 10.5px; color: var(--muted); }
+.pdp h1 { font-size: clamp(30px, 4vw, 44px); }
+.pdp .price .now { font-size: 30px; }
+.opt { margin: 22px 0; }
+.opt-label { font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin-bottom: 10px; display: flex; justify-content: space-between; }
+.opt-label a { color: var(--gold); text-transform: none; letter-spacing: 0; font-weight: 600; }
+.colors { display: flex; gap: 10px; flex-wrap: wrap; }
+.color { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #0003; cursor: pointer; outline-offset: 3px; }
+.color.active { outline: 2px solid var(--gold); }
+.sizes { display: flex; gap: 8px; flex-wrap: wrap; }
+.size { min-width: 50px; height: 46px; border-radius: 10px; background: var(--bg-2); border: 1.5px solid var(--line); cursor: pointer; font-weight: 700; padding: 0 12px; }
+.size.active { border-color: var(--gold); background: #f5b23c1a; color: var(--gold); }
+.seg { display: inline-flex; background: var(--bg-2); border: 1px solid var(--line); border-radius: 999px; padding: 4px; }
+.seg button { border: 0; background: none; padding: 8px 16px; border-radius: 999px; cursor: pointer; font-weight: 600; color: var(--muted); }
+.seg button.active { background: var(--grad); color: #1a0f00; }
+.perso { background: var(--bg-2); border: 1px dashed #f5b23c66; border-radius: var(--radius); padding: 18px 18px 6px; }
+.perso h4 { margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.upload { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1.5px dashed var(--line); border-radius: 10px; cursor: pointer; }
+.upload:hover { border-color: var(--gold); }
+.upload img { width: 48px; height: 48px; object-fit: cover; border-radius: 8px; }
+.upload input { display: none; }
+.qty { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; }
+.qty button { background: none; border: 0; width: 42px; height: 46px; font-size: 18px; cursor: pointer; }
+.qty button:hover { background: var(--bg-2); }
+.qty input { width: 42px; text-align: center; background: none; border: 0; font-weight: 700; -moz-appearance: textfield; }
+.qty input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.buy-row { display: flex; gap: 12px; align-items: center; margin-top: 8px; }
+.buy-row .btn { flex: 1; }
+.perks { list-style: none; padding: 0; margin: 22px 0; display: grid; gap: 10px; }
+.perks li { display: flex; gap: 10px; color: var(--muted); font-size: 14px; }
+.ship-calc { display: flex; gap: 8px; }
+.ship-calc input { flex: 1; }
+.ship-res { margin-top: 10px; display: grid; gap: 6px; font-size: 14px; }
+.ship-res div { display: flex; justify-content: space-between; padding: 10px 12px; background: var(--bg-2); border-radius: 8px; }
+details.acc { border-top: 1px solid var(--line); padding: 14px 0; }
+details.acc summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; }
+details.acc summary::after { content: '+'; color: var(--gold); font-size: 20px; line-height: 1; }
+details.acc[open] summary::after { content: '–'; }
+details.acc p, details.acc ul { color: var(--muted); font-size: 14px; }
+
+/* ---------- sacola ---------- */
+.drawer-backdrop { position: fixed; inset: 0; background: #00000066; z-index: 60; }
+.drawer, .mobile-menu { position: fixed; top: 0; right: 0; height: 100%; width: min(420px, 100%); background: var(--bg); z-index: 70; display: flex; flex-direction: column; transform: translateX(100%); transition: transform .3s ease; border-left: 1px solid var(--line); }
+.mobile-menu { left: 0; right: auto; transform: translateX(-100%); border-left: 0; border-right: 1px solid var(--line); }
+.drawer.open, .mobile-menu.open { transform: none; }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+.drawer-head h3 { margin: 0; }
+.drawer-body { flex: 1; overflow: auto; padding: 8px 20px; }
+.drawer-foot { padding: 18px 20px; border-top: 1px solid var(--line); display: grid; gap: 10px; }
+.mobile-menu nav { display: grid; padding: 12px; }
+.mobile-menu nav a { padding: 14px 12px; border-radius: 10px; font-weight: 600; }
+.mobile-menu nav a:hover { background: var(--bg-2); }
+.ship-bar { font-size: 13px; color: var(--muted); }
+.ship-bar .bar { height: 6px; background: var(--line); border-radius: 99px; margin-top: 6px; overflow: hidden; }
+.ship-bar .bar i { display: block; height: 100%; background: var(--grad); border-radius: 99px; transition: width .4s; }
+.line-item { display: grid; grid-template-columns: 76px 1fr auto; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.line-item .thumbbox { background: var(--bg-2); border-radius: 10px; padding: 6px; }
+.line-item .meta { font-size: 12.5px; color: var(--muted); }
+.line-item .meta b { color: var(--text); font-weight: 600; }
+.line-item .rm { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 12.5px; text-decoration: underline; padding: 0; }
+.line-item .right { text-align: right; display: flex; flex-direction: column; justify-content: space-between; align-items: end; }
+.line-item .qty button { width: 30px; height: 30px; font-size: 15px; }
+.line-item .qty input { width: 28px; font-size: 13px; }
+.totals { display: grid; gap: 8px; font-size: 14px; }
+.totals div { display: flex; justify-content: space-between; }
+.totals .grand { font-size: 18px; font-weight: 800; padding-top: 8px; border-top: 1px solid var(--line); }
+.totals .disc { color: var(--ok); }
+
+/* ---------- carrinho / checkout ---------- */
+.page-title { padding: 32px 0 8px; }
+.layout-2 { display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; padding-bottom: 60px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+.summary { position: sticky; top: 90px; }
+.coupon { display: flex; gap: 8px; margin: 14px 0; }
+.coupon input { flex: 1; background: var(--bg-2); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; text-transform: uppercase; outline: none; }
+.coupon .btn { padding: 10px 16px; }
+.coupon-ok { color: var(--ok); font-size: 13px; display: flex; justify-content: space-between; }
+.coupon-ok button { background: none; border: 0; color: var(--muted); cursor: pointer; text-decoration: underline; }
+
+.progress { display: flex; gap: 0; margin: 18px 0 26px; }
+.progress div { flex: 1; text-align: center; font-size: 12.5px; font-weight: 600; color: var(--muted); position: relative; padding-top: 34px; }
+.progress div::before { content: attr(data-n); position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--card); border: 1.5px solid var(--line); z-index: 1; font-weight: 800; }
+.progress div::after { content: ''; position: absolute; top: 14px; left: -50%; width: 100%; height: 2px; background: var(--line); }
+.progress div:first-child::after { display: none; }
+.progress div.done, .progress div.cur { color: var(--text); }
+.progress div.done::before { content: '✓'; background: var(--grad); color: #000; border-color: transparent; }
+.progress div.cur::before { border-color: var(--gold); color: var(--gold); }
+.progress div.done::after, .progress div.cur::after { background: var(--gold); }
+
+.ck-step { margin-bottom: 16px; }
+.ck-step .head { display: flex; justify-content: space-between; align-items: center; }
+.ck-step .head h3 { margin: 0; display: flex; gap: 10px; align-items: center; }
+.ck-step .head h3 span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--grad); color: #000; font-family: var(--font); font-size: 14px; font-weight: 800; }
+.ck-step.locked { opacity: .45; }
+.ck-step .done-info { color: var(--muted); font-size: 14px; margin-top: 8px; }
+.edit-link { background: none; border: 0; color: var(--gold); cursor: pointer; font-weight: 600; }
+.ck-step .content { margin-top: 18px; }
+.radio-card { display: flex; gap: 12px; align-items: center; padding: 14px; border: 1.5px solid var(--line); border-radius: 12px; cursor: pointer; margin-bottom: 10px; transition: border-color .2s; }
+.radio-card:hover { border-color: #f5b23c88; }
+.radio-card.active { border-color: var(--gold); background: #f5b23c0f; }
+.radio-card input { accent-color: var(--gold); width: 18px; height: 18px; }
+.radio-card .grow { flex: 1; }
+.radio-card small { display: block; color: var(--muted); }
+.pay-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+.pay-tab { padding: 14px 8px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--bg-2); cursor: pointer; text-align: center; font-weight: 700; }
+.pay-tab small { display: block; font-weight: 500; font-size: 11.5px; color: var(--ok); }
+.pay-tab.active { border-color: var(--gold); background: #f5b23c14; }
+.card-input { position: relative; }
+.card-input .brand { position: absolute; right: 12px; bottom: 12px; font-size: 11px; font-weight: 800; color: var(--gold); letter-spacing: .5px; }
+.secure { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 12.5px; justify-content: center; margin-top: 12px; }
+.mini-items { display: grid; gap: 10px; margin-bottom: 14px; max-height: 260px; overflow: auto; }
+.mini-item { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; font-size: 13px; align-items: center; }
+.mini-item .thumbbox { background: var(--bg-2); border-radius: 8px; padding: 4px; position: relative; }
+.mini-item .q { position: absolute; top: -6px; right: -6px; background: var(--gold); color: #000; font-size: 10.5px; font-weight: 800; border-radius: 99px; min-width: 18px; height: 18px; display: grid; place-items: center; }
+
+/* ---------- pagamento / pedido ---------- */
+.order-hero { text-align: center; padding: 40px 0 20px; }
+.order-hero .big { font-size: 56px; display: block; }
+.pix-box { display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: center; }
+.qr { background: #fff; padding: 12px; border-radius: 12px; width: 220px; height: 220px; display: grid; place-items: center; }
+.qr img, .qr canvas { width: 196px !important; height: 196px !important; }
+.copy { display: flex; gap: 8px; }
+.copy input { flex: 1; min-width: 0; background: var(--bg-2); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 12px; color: var(--muted); }
+.timer { font-family: var(--display); font-size: 30px; color: var(--gold); }
+.timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+.timeline li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding-bottom: 20px; position: relative; color: var(--muted); }
+.timeline li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--line); background: var(--bg); margin: 3px 0 0 8px; z-index: 1; }
+.timeline li::after { content: ''; position: absolute; left: 15px; top: 20px; bottom: 0; width: 2px; background: var(--line); }
+.timeline li:last-child::after { display: none; }
+.timeline li.done { color: var(--text); }
+.timeline li.done::before { background: var(--gold); border-color: var(--gold); }
+.timeline li.now::before { border-color: var(--gold); box-shadow: 0 0 0 5px #f5b23c33; }
+.timeline small { display: block; font-size: 12px; color: var(--muted); }
+.status { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.status.pendente { background: #f5b23c22; color: var(--gold); }
+.status.pago { background: #2ecc7122; color: var(--ok); }
+.status.cancelado { background: #ff5a5222; color: var(--err); }
+.order-row { display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.demo-note { background: #f5b23c14; border: 1px dashed #f5b23c66; color: var(--gold); border-radius: 10px; padding: 10px 14px; font-size: 13px; margin: 14px 0; }
+.spinner { width: 46px; height: 46px; border-radius: 50%; border: 4px solid var(--line); border-top-color: var(--gold); animation: spin .8s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- ajuda ---------- */
+.help { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 20px 0 60px; }
+.help nav { display: grid; gap: 4px; align-content: start; position: sticky; top: 90px; }
+.help nav a { padding: 10px 14px; border-radius: 10px; color: var(--muted); font-weight: 600; }
+.help nav a.active, .help nav a:hover { background: var(--bg-2); color: var(--text); }
+table.sizes-t { width: 100%; border-collapse: collapse; margin: 12px 0 28px; font-size: 14px; }
+table.sizes-t th, table.sizes-t td { padding: 10px; border-bottom: 1px solid var(--line); text-align: center; }
+table.sizes-t th { color: var(--gold); font-weight: 700; }
+
+/* ---------- rodapé ---------- */
+.footer { border-top: 1px solid var(--line); background: var(--bg-2); padding: 48px 0 24px; margin-top: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px; }
+.footer h4 { margin: 0 0 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); }
+.footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 14px; }
+.footer ul a:hover { color: var(--gold); }
+.footer-bottom { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; }
+.pay-icons { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+.pay-icons span { font-size: 10px; font-weight: 800; padding: 4px 7px; border: 1px solid var(--line); border-radius: 5px; color: var(--muted); }
+.wpp-float { position: fixed; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px #25d36655; z-index: 50; transition: transform .2s; }
+.wpp-float:hover { transform: scale(1.08); }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 220%); visibility: hidden; background: #16150f; color: #fff; padding: 12px 20px; border-radius: 999px; font-weight: 700; z-index: 90; transition: transform .3s; box-shadow: var(--shadow); max-width: calc(100% - 32px); text-align: center; }
+.toast.show { transform: translate(-50%, 0); visibility: visible; }
+
+/* ---------- responsivo ---------- */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .trust { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav { display: none; }
+  .menu-btn { display: grid; }
+  .layout-2 { grid-template-columns: 1fr; }
+  .summary { position: static; }
+  .footer-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  body { font-size: 14.5px; }
+  .header-in { gap: 8px; height: 60px; }
+  .search { display: none; }
+  .header-actions { margin-left: auto; }
+  .logo-img { width: 46px; height: 46px; }
+  .hero-in { grid-template-columns: 1fr; padding: 36px 0; gap: 10px; }
+  .hero-tees { height: 280px; order: -1; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .card .body { padding: 10px 12px 14px; }
+  .card .name { font-size: 13.5px; }
+  .price .now { font-size: 16px; }
+  .steps, .trust { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .banner-team { grid-template-columns: 1fr; padding: 24px; }
+  .pdp { grid-template-columns: 1fr; gap: 20px; }
+  .gallery { position: static; }
+  .gallery .stage { padding: 20px; }
+  .row-3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .row-3 > :first-child { grid-column: 1 / -1; }
+  .pix-box { grid-template-columns: 1fr; justify-items: center; }
+  .help { grid-template-columns: 1fr; }
+  .help nav { position: static; display: flex; overflow: auto; }
+  .help nav a { white-space: nowrap; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .order-row { grid-template-columns: 1fr auto; }
+  .order-row .btn { grid-column: 1 / -1; }
+  .filters select { margin-left: 0; width: 100%; }
+  .topbar { font-size: 11px; }
+  .topbar .sep { display: none; }
+}
+@media (max-width: 400px) {
+  .row { grid-template-columns: 1fr; }
+  .pay-tabs { grid-template-columns: 1fr; }
+}
+
+/* ---------- prévia: fotos reais do Instagram ---------- */
+.foto { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto-crop { background-size: 300% auto; background-repeat: no-repeat; aspect-ratio: 1; height: auto; }
+.card .media { aspect-ratio: 4 / 5; padding: 0; overflow: hidden; background: var(--bg-2); }
+.card .media .foto { transition: transform .4s; }
+.card:hover .media .foto { transform: scale(1.04); }
+.hero-photos { display: grid; grid-template-columns: 1.25fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; height: 520px; min-width: 0; }
+.hp { border-radius: var(--radius); overflow: hidden; display: block; min-height: 0; box-shadow: var(--shadow); }
+.hp img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.hp:hover img { transform: scale(1.04); }
+.hp1 { grid-row: 1 / 3; }
+.cats-foto { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.cat-foto { position: relative; display: block; aspect-ratio: 3 / 4; border-radius: var(--radius); overflow: hidden; }
+.cat-foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.cat-foto:hover img { transform: scale(1.06); }
+.cat-foto::after { content: ''; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, #000c); }
+.cat-foto b { position: absolute; left: 12px; bottom: 10px; z-index: 1; color: #fff; font-family: var(--display); font-weight: 400; font-size: 20px; letter-spacing: .5px; }
+.gallery .stage.is-foto { padding: 0; overflow: hidden; aspect-ratio: 4 / 5; background: var(--bg-2); }
+.gallery .stage { aspect-ratio: 4 / 5; }
+.gallery .stage.is-foto { display: block; }
+.gallery .stage .foto-crop { aspect-ratio: auto; height: 100%; background-size: auto 240%; }
+.thumb { overflow: hidden; }
+.thumb .foto { height: 50px; border-radius: 6px; }
+.thumb .foto-crop { width: 100%; aspect-ratio: auto; }
+.thumb svg { height: 50px; margin: 0 auto; }
+.line-item .thumbbox, .mini-item .thumbbox { padding: 0; }
+.line-item .thumbbox { overflow: hidden; aspect-ratio: 4 / 5; }
+.mini-item .thumbbox .foto { border-radius: 8px; aspect-ratio: 4 / 5; }
+.prensa { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.1fr) minmax(0, .8fr); gap: 24px; align-items: center; }
+.prensa figure { margin: 0; }
+.prensa img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: var(--radius); }
+.prensa figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.prensa-txt { text-align: center; }
+.prensa-txt .hero-ctas { justify-content: center; }
+@media (max-width: 1024px) {
+  .cats-foto { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .hero-photos { height: 340px; order: -1; }
+  .prensa { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .prensa-txt { grid-column: 1 / -1; grid-row: 1; }
+}
+
+/* ---------- estrutura inspirada na DLK, com a identidade da BBS ---------- */
+@media (min-width: 861px) { .nav { display: flex; } .menu-btn { display: none; } }
+@media (max-width: 860px) { .nav { display: none; } .menu-btn { display: grid; } }
+.nav a:last-child { background: #16150f; color: #fff; }
+.nav a:last-child:hover { background: #000; color: #fff; }
+.cart-btn svg, .icon-btn svg { display: block; }
+.empty .e:empty, .order-hero .big:empty { display: none; }
+
+.hb { position: relative; height: 580px; overflow: hidden; background: #16150f; color: #fff; }
+.hb-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .6s, visibility .6s; }
+.hb-slide.active { opacity: 1; visibility: visible; }
+.hb-bg { position: absolute; inset: -60px; background-size: cover; background-position: center; filter: blur(30px) brightness(.42) saturate(1.2); }
+.hb-in { position: relative; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: center; }
+.hb-h { font-family: var(--display); font-weight: 400; font-size: clamp(46px, 7.4vw, 92px); line-height: 1.02; margin: 16px 0 14px; letter-spacing: .5px; }
+.hb-txt p { font-size: 18px; max-width: 42ch; margin: 0 0 26px; opacity: .92; }
+.hb-photo { display: block; height: 500px; aspect-ratio: 4 / 5; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 50px #0008; }
+.hb-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hb-dots { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 8px; z-index: 3; }
+.hb-dots button { width: 34px; height: 5px; border-radius: 9px; border: 0; padding: 0; background: #fff6; cursor: pointer; }
+.hb-dots button.active { background: #f9b233; }
+
+.benef { background: #16150f; color: #fff; }
+.benef-in { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.benef-in div { padding: 18px 16px; border-left: 1px solid #ffffff22; }
+.benef-in div:first-child { border-left: 0; }
+.benef-in b { display: block; font-size: 15px; }
+.benef-in span { font-size: 13px; color: #cfcbc2; }
+
+.quem { text-align: center; padding-block: 48px 8px; }
+.quem h2 { margin-bottom: 4px; }
+.quem-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 860px; margin: 18px auto 0; }
+.quem-grid a { background: var(--bg-2); border: 1.5px solid transparent; border-radius: 12px; padding: 24px 10px; font-weight: 700; transition: .15s; }
+.quem-grid a:hover { border-color: var(--gold-2); color: var(--gold); background: #fff; }
+
+.sec { padding-block: 44px; }
+.sec-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; }
+.sec-head h2 { margin: 0; display: flex; align-items: center; gap: 10px; font-size: clamp(24px, 3vw, 32px); }
+.sec-head h2 i { width: 9px; height: 9px; border-radius: 50%; background: var(--gold-2); flex: none; }
+.sec-head > a { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+
+.car { position: relative; }
+.car-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+.car-track::-webkit-scrollbar { display: none; }
+.car-track > * { flex: 0 0 calc((100% - 42px) / 4); scroll-snap-align: start; min-width: 0; }
+.car-btn { position: absolute; top: 38%; z-index: 3; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); font-size: 24px; line-height: 1; cursor: pointer; }
+.car-btn.prev { left: -14px; } .car-btn.next { right: -14px; }
+.car-btn:hover { background: var(--bg-2); }
+
+.card { border: 0; border-radius: 0; background: none; overflow: visible; }
+.card:hover { border: 0; transform: none; box-shadow: none; }
+.card .media { border-radius: 10px; }
+.card .body { padding: 10px 2px 2px; gap: 3px; }
+.card .name { font-size: 14.5px; font-weight: 600; }
+.card .price .now { font-size: 17px; }
+
+.ocasiao { background: #16150f; color: #fff; border-radius: 12px; display: grid; grid-template-columns: 1.1fr repeat(3, minmax(0, 1fr)); align-items: stretch; }
+.ocasiao > * { padding: 22px 20px; border-left: 1px solid #ffffff22; }
+.ocasiao > span { border-left: 0; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; font-size: 13px; align-self: center; }
+.ocasiao a { font-size: 15px; color: #ddd9d0; }
+.ocasiao a b { font-size: 19px; color: #f9b233; }
+.ocasiao a:hover { background: #ffffff12; }
+
+.cats-alta { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.cats-alta span { display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 10px; background: var(--bg-2); }
+.cats-alta img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.cats-alta a:hover img { transform: scale(1.05); }
+.cats-alta b { display: block; margin-top: 8px; font-size: 13px; letter-spacing: .5px; text-transform: uppercase; }
+
+.reels-sec { background: var(--bg-2); }
+.reel-v { display: block; position: relative; aspect-ratio: 9 / 14; border-radius: 12px; overflow: hidden; }
+.reel-v img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 52px; height: 52px; border-radius: 50%; background: #000a; color: #fff; display: grid; place-items: center; font-size: 18px; padding-left: 3px; }
+.reel-p { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 10px; align-items: center; background: #fff; border-radius: 10px; padding: 8px; margin-top: 8px; font-size: 13px; line-height: 1.25; }
+.reel-t { display: block; height: 52px; border-radius: 6px; overflow: hidden; }
+.reel-t .foto { height: 100%; }
+.reel-p small { display: block; color: var(--muted); margin-top: 2px; }
+
+.colecoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.colecoes a { position: relative; display: flex; align-items: flex-end; aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden; background-size: cover; background-position: center; color: #fff; }
+.colecoes a::before { content: ''; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, #000d); }
+.colecoes a > div { position: relative; padding: 20px; }
+.colecoes b { font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: .5px; display: block; line-height: 1.1; }
+.colecoes p { margin: 4px 0 12px; font-size: 14px; }
+.ver { display: inline-block; background: #fff; color: #16150f; font-weight: 700; font-size: 14px; border-radius: 999px; padding: 8px 18px; }
+
+.destaque { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr); gap: 28px; align-items: center; }
+.destaque img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 12px; }
+.destaque figure { margin: 0; }
+.destaque figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.d-b { text-align: center; }
+
+.pdp2 { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 36px; padding-bottom: 28px; align-items: start; }
+.gal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; position: sticky; top: 84px; }
+.gal.single { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
+.gal-i { margin: 0; min-width: 0; }
+.gal-i:first-child:nth-last-child(3) { grid-column: 1 / -1; }
+.gal-i:first-child:nth-last-child(3) .gal-m { aspect-ratio: 5 / 4; }
+.gal-m { aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: var(--bg-2); display: grid; place-items: center; }
+.gal-i.is-svg .gal-m { padding: 18px; }
+.gal-m svg { width: 100%; filter: drop-shadow(0 12px 14px #0003); }
+.gal-m .foto { width: 100%; height: 100%; }
+.gal-m .foto-crop { aspect-ratio: auto; background-size: auto 240%; }
+.gal-i figcaption { font-size: 12.5px; color: var(--muted); margin-top: 5px; }
+.info h1 { font-family: var(--font); font-weight: 800; font-size: clamp(22px, 2.6vw, 28px); letter-spacing: 0; line-height: 1.2; margin: 10px 0 12px; }
+.preco { border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+#pdpPix b { font-size: 30px; font-weight: 800; }
+.off { display: inline-block; font-size: 12px; font-weight: 700; color: var(--ok); border: 1px solid var(--ok); border-radius: 999px; padding: 2px 8px; vertical-align: middle; }
+.info .price-parc { font-size: 14px; }
+.opt-label .val { color: var(--text); text-transform: none; letter-spacing: 0; margin-left: 6px; margin-right: auto; }
+.chips { list-style: none; padding: 0; margin: 18px 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font-size: 13px; background: var(--bg-2); border-radius: 999px; padding: 6px 12px; }
+.kit { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; border: 1.5px solid var(--line); border-radius: 12px; padding: 14px; }
+.kit div { flex: 1; min-width: 180px; }
+.kit b { display: block; }
+.kit span { font-size: 13.5px; color: var(--muted); }
+.kit .btn { padding: 10px 18px; }
+
+@media (max-width: 1024px) {
+  .car-track > * { flex-basis: calc((100% - 28px) / 3); }
+  .cats-alta { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hb-photo { height: 430px; }
+}
+@media (max-width: 760px) {
+  .hb { height: 720px; }
+  .hb-in { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 18px; padding-block: 16px 34px; }
+  .hb-h { font-size: 46px; margin: 10px 0; }
+  .hb-txt p { font-size: 15.5px; margin-bottom: 14px; }
+  .hb-photo { height: 320px; justify-self: center; }
+  .benef-in { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .benef-in div { padding: 12px; border-left: 0; }
+  .quem-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .car-track > * { flex-basis: 62%; }
+  .car-btn { display: none; }
+  .ocasiao { grid-template-columns: minmax(0, 1fr); }
+  .ocasiao > * { border-left: 0; border-top: 1px solid #ffffff22; padding: 14px 18px; }
+  .ocasiao > span { border-top: 0; }
+  .colecoes { grid-template-columns: minmax(0, 1fr); }
+  .destaque { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+  .d-b { grid-column: 1 / -1; grid-row: 1; }
+  .pdp2 { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .gal { position: static; }
+  .sec-head h2 { font-size: 24px; }
+}
+
+/* ---------- fontes: Sora nos títulos e Figtree nos textos ---------- */
+:root { --font: 'Figtree', system-ui, sans-serif; --display: 'Sora', 'Figtree', system-ui, sans-serif; }
+h1, h2, h3 { font-weight: 700; letter-spacing: -.025em; line-height: 1.12; }
+h1 { font-size: clamp(30px, 4.4vw, 50px); }
+h2 { font-size: clamp(24px, 3vw, 34px); }
+h3 { font-size: 19px; }
+.sec-head h2 { font-size: clamp(21px, 2.4vw, 27px); }
+.hb-h { font-weight: 800; font-size: clamp(36px, 5.2vw, 62px); line-height: 1.06; letter-spacing: -.035em; }
+.info h1 { font-family: var(--display); font-size: clamp(21px, 2.3vw, 26px); }
+.colecoes b { font-weight: 700; font-size: 23px; letter-spacing: -.02em; }
+.step::before { font-weight: 800; font-size: 34px; }
+.timer { font-weight: 700; font-size: 28px; }
+#pdpPix b { font-family: var(--display); font-weight: 700; letter-spacing: -.02em; font-size: 27px; }
+@media (max-width: 760px) {
+  .hb-h { font-size: 36px; }
+}
+
+/* ---------- faixa do topo: preto da logo no lugar do degradê ---------- */
+.topbar { background: #16150f; color: #fff; font-weight: 600; letter-spacing: .1px; }
+.topbar .sep { opacity: .35; }
+.demo-bar { background: var(--bg-2); color: var(--muted); border-bottom: 0; font-weight: 500; }
+
+/* ---------- faixa do topo em movimento ---------- */
+.topbar { display: block; padding: 0; overflow: hidden; text-align: left; }
+.topbar-track { display: flex; width: max-content; animation: topbar-corre 48s linear infinite; }
+.topbar:hover .topbar-track { animation-play-state: paused; }
+.topbar-set { display: flex; flex: none; }
+.topbar-set span { white-space: nowrap; padding: 8px 0; font-size: 13px; }
+.topbar-set span::after { content: '•'; margin: 0 26px; opacity: .4; }
+@keyframes topbar-corre { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .topbar-track { animation: none; } }
+
+</style>
+  <link rel="stylesheet" href="css/melhorias.css">
+</head>
+<body>
+  <div class="demo-bar" id="demoBar">Prévia com as fotos do Instagram da BBS. Preços de exemplo, nenhum pagamento é cobrado. Não digite dados reais de cartão.</div>
+  <div class="topbar"><div class="topbar-track"><div class="topbar-set"><span>Frete grátis acima de R$ 199</span><span>5% OFF no Pix</span><span>Até 6x sem juros</span><span>Você aprova a arte antes da produção</span><span>Frete grátis acima de R$ 199</span><span>5% OFF no Pix</span><span>Até 6x sem juros</span><span>Você aprova a arte antes da produção</span><span>Frete grátis acima de R$ 199</span><span>5% OFF no Pix</span><span>Até 6x sem juros</span><span>Você aprova a arte antes da produção</span></div><div class="topbar-set" aria-hidden="true"><span>Frete grátis acima de R$ 199</span><span>5% OFF no Pix</span><span>Até 6x sem juros</span><span>Você aprova a arte antes da produção</span><span>Frete grátis acima de R$ 199</span><span>5% OFF no Pix</span><span>Até 6x sem juros</span><span>Você aprova a arte antes da produção</span><span>Frete grátis acima de R$ 199</span><span>5% OFF no Pix</span><span>Até 6x sem juros</span><span>Você aprova a arte antes da produção</span></div></div></div>
+
+  <header class="header">
+    <div class="wrap header-in">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+      <a href="#/" class="logo" aria-label="BBS Store, início">
+        <img class="logo-img" src="img/logo.png" alt="BBS Store" width="54" height="54">
+      </a>
+      <nav class="nav" id="nav"></nav>
+      <form class="search" id="searchForm" role="search">
+        <input type="search" id="searchInput" placeholder="Buscar camisa…" aria-label="Buscar produtos">
+      </form>
+      <div class="header-actions">
+        <a href="#/pedidos" class="icon-btn" aria-label="Meus pedidos" title="Meus pedidos"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></a>
+        <button class="icon-btn cart-btn" id="cartBtn" aria-label="Abrir sacola">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" class="app" tabindex="-1"></main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="logo-img small" src="img/logo.png" alt="BBS Store" width="46" height="46">
+        <p class="muted">Produtos personalizados para você e para presentear. Arte aprovada por você antes da produção.</p>
+      </div>
+      <div>
+        <h4>Loja</h4>
+        <ul id="footerCats"></ul>
+      </div>
+      <div>
+        <h4>Ajuda</h4>
+        <ul>
+          <li><a href="#/ajuda">Perguntas frequentes</a></li>
+          <li><a href="#/ajuda/medidas">Tabela de medidas</a></li>
+          <li><a href="#/ajuda/trocas">Trocas e devoluções</a></li>
+          <li><a href="#/pedidos">Acompanhar pedido</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Atendimento</h4>
+        <ul>
+          <li><a id="footerWpp" target="_blank" rel="noopener">WhatsApp (48) 99157-1420</a></li>
+          <li><a href="https://www.instagram.com/bbs.store.br/" target="_blank" rel="noopener">@bbs.store.br</a></li>
+          <li class="muted">Seg a Sex, 9h às 18h</li>
+        </ul>
+        <div class="pay-icons" aria-label="Formas de pagamento">
+          <span>PIX</span><span>VISA</span><span>MASTER</span><span>ELO</span><span>BOLETO</span>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bottom muted">
+      © <span id="year"></span> BBS Store • CNPJ 00.000.000/0001-00 • Pagamento 100% seguro
+    </div>
+  </footer>
+
+  <a class="wpp-float" id="wppFloat" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+  </a>
+
+  <!-- Sacola lateral -->
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="drawer" id="drawer" aria-label="Sacola de compras" aria-hidden="true">
+    <div class="drawer-head">
+      <h3>Sua sacola</h3>
+      <button class="icon-btn" id="drawerClose" aria-label="Fechar sacola">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot" id="drawerFoot"></div>
+  </aside>
+
+  <!-- Menu mobile -->
+  <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="drawer-head">
+      <img class="logo-img small" src="img/logo.png" alt="BBS Store" width="46" height="46">
+      <button class="icon-btn" id="mobileClose" aria-label="Fechar menu">✕</button>
+    </div>
+    <nav id="mobileNav"></nav>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+/* ============================================================
+   BBS Store: configuração da loja e catálogo
+   Edite este arquivo para trocar preços, produtos, frete e Pix.
+   ============================================================ */
+
+const CONFIG = {
+  nome: 'BBS Store',
+  slogan: 'Personalize seu estilo!',
+  whatsapp: '5548991571420',
+  instagram: 'bbs.store.br',
+  email: 'contato@bbsstore.com.br',          // TODO: e-mail real
+  cidade: 'Florianopolis',                     // usado no payload Pix (sem acento, até 15 letras)
+  pixChave: 'SUA-CHAVE-PIX-AQUI',              // TODO: chave Pix real da loja (CNPJ, e-mail, telefone ou aleatória)
+  pixRecebedor: 'BBS STORE',
+  pixDesconto: 0.05,                           // 5% off no Pix
+  freteGratisAcima: 199,
+  parcelasSemJuros: 6,
+  parcelaMinima: 10,
+  prazoProducao: '3 a 5 dias úteis',
+  cupons: {
+    BEMVINDO10: { tipo: 'pct', valor: 0.10, desc: '10% na primeira compra' },
+    FUTSAL15:   { tipo: 'pct', valor: 0.15, desc: '15% em toda a loja', minimo: 150 },
+    FRETEGRATIS:{ tipo: 'frete', valor: 0, desc: 'Frete grátis' },
+  },
+};
+
+const CATEGORIAS = [
+  { id: 'futebol', nome: 'Futebol',  emoji: '', foto: 'img/geracao-futebol.webp' },
+  { id: 'futsal',  nome: 'Futsal',   emoji: '', foto: 'img/paixao-pelo-futsal.webp' },
+  { id: 'goleiro', nome: 'Goleiro',  emoji: '', foto: 'img/eu-escolhi-ser-goleiro.webp' },
+  { id: 'gamer',   nome: 'Gamer',    emoji: '', foto: 'img/viciados-para-jogar.webp' },
+  { id: 'pet',     nome: 'Pet',      emoji: '', foto: 'img/pet-personalizada.webp' },
+  { id: 'presente',nome: 'Presentes',emoji: '', foto: 'img/colecao-posicao.webp' },
+];
+
+const CORES = {
+  preto:   { nome: 'Preto',         hex: '#141414' },
+  branco:  { nome: 'Branco',        hex: '#f4f4f2' },
+  marinho: { nome: 'Azul-marinho',  hex: '#1b2547' },
+  bege:    { nome: 'Bege',          hex: '#d9c3a0' },
+  cinza:   { nome: 'Cinza mescla',  hex: '#9a9a9a' },
+};
+
+const MODELOS = {
+  adulto:   { nome: 'Adulto',     tamanhos: ['P','M','G','GG','XG'], acrescimo: 0 },
+  babylook: { nome: 'Baby look',  tamanhos: ['P','M','G','GG'],      acrescimo: 0 },
+  infantil: { nome: 'Infantil',   tamanhos: ['2','4','6','8','10','12','14'], acrescimo: -10 },
+};
+
+/* Arte da camisa: cada linha é desenhada no peito (frente).
+   {nome}, {numero}, {ano}, {posicao}, {nick} são trocados pela personalização do cliente. */
+const PRODUTOS = [
+  {
+    id: 'colecao-posicao', nome: 'Coleção Posição', foto: 'img/colecao-posicao.webp',
+    categorias: ['futebol','futsal','presente'], preco: 89.90, cores: ['preto'], tag: 'Escolha a posição',
+    descricao: 'Uma arte para cada posição, com a faixa vermelha e branca atrás do jogador: atacante, meia, zagueiro, lateral e volante. Escolha a sua e coloque seu nome e número nas costas.',
+    recortes: { ATACANTE: [0, 18], MEIA: [50, 18], ZAGUEIRO: [100, 18], LATERAL: [0, 76], VOLANTE: [50, 76] },
+    personalizacao: [
+      { campo: 'posicao', label: 'Posição', tipo: 'select', opcoes: ['ATACANTE','MEIA','ZAGUEIRO','LATERAL','VOLANTE'], obrigatorio: true },
+      { campo: 'nome', label: 'Nome nas costas', tipo: 'text', max: 12, obrigatorio: true, placeholder: 'Ex.: GABRIEL' },
+      { campo: 'numero', label: 'Número', tipo: 'number', max: 2, obrigatorio: true, placeholder: '10' },
+    ],
+    costas: true,
+  },
+  {
+    id: 'paixao-pelo-futsal', nome: 'Paixão pelo Futsal', foto: 'img/paixao-pelo-futsal.webp',
+    categorias: ['futsal','presente'], preco: 79.90, cores: ['branco'],
+    descricao: 'A chuteira em cima da bola, a quadra ao fundo e o amarelo tomando conta da estampa. Para quem vive o futsal.',
+  },
+  {
+    id: 'eu-escolhi-ser-goleiro', nome: 'Eu Escolhi Ser Goleiro', foto: 'img/eu-escolhi-ser-goleiro.webp',
+    categorias: ['goleiro','presente'], preco: 84.90, cores: ['bege'], tag: 'Personalizável',
+    descricao: 'O goleiro em voo, em traço fino, com o lettering manuscrito atravessando a camisa. Coloque nome e número nas costas, se quiser.',
+    personalizacao: [
+      { campo: 'nome', label: 'Nome nas costas (opcional)', tipo: 'text', max: 12, placeholder: 'Ex.: CÁSSIO' },
+      { campo: 'numero', label: 'Número (opcional)', tipo: 'number', max: 2, placeholder: '1' },
+    ],
+    costas: true,
+  },
+  {
+    id: 'geracao-futebol', nome: 'Geração Futebol', foto: 'img/geracao-futebol.webp',
+    categorias: ['futebol','presente'], preco: 89.90, cores: ['marinho'], tag: 'Coloque o ano',
+    descricao: 'A camisa da turma: o ano de nascimento em destaque, a bola, o gol e o craque de costas. Na foto, a Geração 2016.',
+    personalizacao: [
+      { campo: 'ano', label: 'Ano (geração)', tipo: 'number', max: 4, obrigatorio: true, placeholder: '2016' },
+      { campo: 'nome', label: 'Nome nas costas (opcional)', tipo: 'text', max: 12, placeholder: 'Ex.: DAVI' },
+    ],
+    arte: { linhas: [
+      { t: 'GERAÇÃO', s: 24, c: '#ff8a1f', w: 900, y: 118 },
+      { t: '{ano}', s: 52, c: '#ffffff', w: 900, y: 168 },
+      { t: 'FUTEBOL', s: 30, c: '#ffd34d', w: 900, y: 205 },
+    ]},
+    previa: true, costas: true,
+  },
+  {
+    id: 'pet-personalizada', nome: 'Camiseta Pet', foto: 'img/pet-personalizada.webp',
+    categorias: ['pet','presente'], preco: 99.90, cores: ['branco'], tag: 'Envie a foto',
+    descricao: 'O seu bicho desenhado sobre as listras coloridas, com o nome dele embaixo. Na foto, o Tibério. Envie uma foto nítida e a gente manda a arte para você aprovar.',
+    personalizacao: [
+      { campo: 'foto', label: 'Foto do pet', tipo: 'file', obrigatorio: true },
+      { campo: 'nome', label: 'Nome do pet', tipo: 'text', max: 14, obrigatorio: true, placeholder: 'Ex.: Tibério' },
+    ],
+    arte: { listras: ['#e86a5a','#f2b84b','#7fb08a','#5b8bbf'], foto: true, linhas: [
+      { t: '{nome}', s: 26, c: '#2a4d7a', w: 700, y: 225, fonte: 'script' },
+    ]},
+    previa: true,
+  },
+  {
+    id: 'viciados-para-jogar', nome: 'Viciados Para Jogar', foto: 'img/viciados-para-jogar.webp',
+    categorias: ['gamer','presente'], preco: 79.90, cores: ['preto'],
+    descricao: 'Headset, controle e coroa em laranja, para quem não larga o jogo. Dá para colocar o seu nick nas costas.',
+    personalizacao: [
+      { campo: 'nick', label: 'Seu nick (opcional, nas costas)', tipo: 'text', max: 14, placeholder: 'Ex.: XxShadowxX' },
+    ],
+    costas: true,
+  },
+  {
+    id: 'respeito-e-a-regra', nome: 'Respeito é a Regra', foto: 'img/respeito-e-a-regra.webp',
+    categorias: ['futebol','presente'], preco: 79.90, cores: ['preto'],
+    descricao: 'O punho fechado e o recado direto: racismo não tem vez. Uma camisa para vestir dentro e fora de campo.',
+  },
+  {
+    id: 'camera-narracao-emocao', nome: 'Câmera, Narração, Emoção', foto: 'img/camera-narracao-emocao.webp',
+    categorias: ['futebol','presente'], preco: 84.90, cores: ['preto'],
+    descricao: 'Para quem transmite o jogo: a câmera, o microfone e o "ao vivo" em destaque.',
+  },
+];
+
+</script>
+  <script>
+/* ============================================================
+   Gerador de mockup de camiseta em SVG (frente e costas)
+   Mostra a personalização do cliente ao vivo.
+   Quando a loja tiver fotos reais, basta adicionar `fotos: [...]`
+   no produto em data.js, o app usa as fotos e mantém o SVG
+   só como prévia da personalização.
+   ============================================================ */
+
+const Tee = (() => {
+  const SHAPE = 'M98 22 Q150 50 202 22 L262 46 L296 108 L252 128 L240 110 L240 302 Q150 312 60 302 L60 110 L48 128 L4 108 L38 46 Z';
+
+  function lum(hex) {
+    const n = parseInt(hex.replace('#', '').padEnd(6, '0').slice(0, 6), 16);
+    const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(v => {
+      v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
+  }
+  function contrast(a, b) {
+    const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05);
+  }
+  // Garante leitura: se a cor da arte some na malha, inverte para preto/branco
+  function legible(color, shirt) {
+    if (contrast(color, shirt) >= 2.2) return color;
+    return lum(shirt) > 0.4 ? '#141414' : '#f4f4f2';
+  }
+
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  function fill(text, p, fallback) {
+    return String(text).replace(/\{(\w+)\}/g, (_, k) => (p[k] && String(p[k]).trim()) || (fallback[k] ?? ''));
+  }
+
+  const DEFAULTS = { nome: 'SEU NOME', numero: '10', ano: '2016', posicao: 'ATACANTE', nick: 'SEU NICK' };
+
+  function fitSize(text, size, maxWidth) {
+    // estimativa simples de largura para não estourar a área de estampa
+    const w = text.length * size * 0.62;
+    return w > maxWidth ? Math.max(10, Math.floor(size * maxWidth / w)) : size;
+  }
+
+  function frente(prod, corId, p = {}) {
+    const shirt = CORES[corId].hex;
+    const a = prod.arte || { linhas: [] };
+    let art = '';
+
+    if (a.faixa) {
+      art += `<rect x="88" y="40" width="16" height="262" fill="${a.faixa[0]}"/>
+              <rect x="104" y="40" width="7" height="262" fill="${legible(a.faixa[1], shirt)}" opacity=".9"/>`;
+    }
+    if (a.listras) {
+      a.listras.forEach((c, i) => { art += `<rect x="${100 + i * 25}" y="98" width="21" height="96" fill="${c}"/>`; });
+    }
+    if (a.foto) {
+      if (p.fotoData) {
+        art += `<clipPath id="petclip"><rect x="104" y="104" width="92" height="92" rx="46"/></clipPath>
+                <image href="${p.fotoData}" x="104" y="104" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#petclip)"/>`;
+      } else {
+        art += `<circle cx="150" cy="150" r="40" fill="#fff" opacity=".85"/>
+                <text x="150" y="160" text-anchor="middle" font-size="30">🐶</text>`;
+      }
+    }
+    (a.linhas || []).forEach(l => {
+      const txt = fill(l.t, p, DEFAULTS);
+      if (!txt.trim()) return;
+      const family = l.fonte === 'script' ? "'Kaushan Script', cursive" : "Anton, Impact, sans-serif";
+      const size = fitSize(txt, l.s, 150);
+      // com contorno a cor original continua legível em qualquer malha
+      const color = l.borda ? l.c : legible(l.c, shirt);
+      const stroke = l.borda ? ` stroke="${l.borda}" stroke-width="3" paint-order="stroke"` : '';
+      art += `<text x="150" y="${l.y}" text-anchor="middle" font-family="${family}" font-size="${size}" font-weight="${l.w}" fill="${color}"${stroke} letter-spacing="${l.fonte === 'script' ? 0 : 0.5}">${esc(txt)}</text>`;
+    });
+    return wrap(shirt, art);
+  }
+
+  function costas(prod, corId, p = {}) {
+    const shirt = CORES[corId].hex;
+    const ink = lum(shirt) > 0.4 ? '#141414' : '#f4f4f2';
+    const nome = (p.nome || p.nick || '').trim();
+    const num = (p.numero || '').toString().trim();
+    let art = '';
+    if (!nome && !num) {
+      art = `<text x="150" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="${ink}" opacity=".45">costas sem estampa</text>`;
+    } else {
+      if (nome) art += `<text x="150" y="${num ? 108 : 160}" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="${fitSize(nome.toUpperCase(), 26, 150)}" fill="${ink}" letter-spacing="1.5">${esc(nome.toUpperCase())}</text>`;
+      if (num) art += `<text x="150" y="215" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="92" fill="${ink}">${esc(num)}</text>`;
+    }
+    return wrap(shirt, art, true);
+  }
+
+  function wrap(shirt, art, back) {
+    const light = lum(shirt) > 0.4;
+    const collar = back
+      ? `<path d="M98 22 Q150 34 202 22" fill="none" stroke="${light ? '#0002' : '#fff2'}" stroke-width="5"/>`
+      : `<path d="M98 22 Q150 58 202 22" fill="none" stroke="${light ? '#0002' : '#fff2'}" stroke-width="6"/>`;
+    return `<svg viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Prévia da camiseta">
+      <defs>
+        <linearGradient id="shade" x1="0" x2="1">
+          <stop offset="0" stop-color="#000" stop-opacity=".18"/>
+          <stop offset=".25" stop-color="#000" stop-opacity="0"/>
+          <stop offset=".75" stop-color="#000" stop-opacity="0"/>
+          <stop offset="1" stop-color="#000" stop-opacity=".18"/>
+        </linearGradient>
+        <clipPath id="teeclip"><path d="${SHAPE}"/></clipPath>
+      </defs>
+      <path d="${SHAPE}" fill="${shirt}" stroke="${light ? '#0000001f' : '#ffffff1a'}" stroke-width="1.5"/>
+      <g clip-path="url(#teeclip)">${art}</g>
+      <path d="${SHAPE}" fill="url(#shade)"/>
+      ${collar}
+    </svg>`;
+  }
+
+  return { frente, costas, lum };
+})();
+
+
+</script>
+  <!-- Melhorias de conversão: precisa vir antes do app -->
+  <script src="js/melhorias.js"></script>
+  <script>
+/* ============================================================
+   BBS Store: aplicação (vitrine, sacola, checkout e pedidos)
+   SPA com roteamento por hash. Sem dependências além do qrcode.js.
+   ============================================================ */
+
+/* ---------- utilitários ---------- */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const app = $('#app');
+const BRL = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const digits = s => String(s || '').replace(/\D/g, '');
+const prodById = id => PRODUTOS.find(p => p.id === id);
+const catById = id => CATEGORIAS.find(c => c.id === id);
+const waLink = msg => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+
+const store = {
+  get(k, def) { try { const v = localStorage.getItem('bbs_' + k); return v ? JSON.parse(v) : def; } catch { return def; } },
+  set(k, v) { try { localStorage.setItem('bbs_' + k, JSON.stringify(v)); } catch { /* armazenamento indisponível */ } },
+};
+
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+const mask = {
+  cpf: v => digits(v).slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'),
+  tel: v => { const d = digits(v).slice(0, 11); return d.length > 10 ? d.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3') : d.replace(/(\d{2})(\d{0,4})(\d{0,4})/, (m, a, b, c) => `(${a}) ${b}${c ? '-' + c : ''}`).replace(/\(\)\s?/, ''); },
+  cep: v => digits(v).slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2'),
+  card: v => digits(v).slice(0, 16).replace(/(\d{4})(?=\d)/g, '$1 '),
+  val: v => digits(v).slice(0, 4).replace(/(\d{2})(\d)/, '$1/$2'),
+  cvv: v => digits(v).slice(0, 4),
+};
+
+const valid = {
+  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+  nome: v => v.trim().split(/\s+/).length >= 2,
+  tel: v => digits(v).length >= 10,
+  cep: v => digits(v).length === 8,
+  cpf(v) {
+    const c = digits(v);
+    if (c.length !== 11 || /^(\d)\1+$/.test(c)) return false;
+    for (let t = 9; t < 11; t++) {
+      let s = 0;
+      for (let i = 0; i < t; i++) s += c[i] * (t + 1 - i);
+      if (((s * 10) % 11) % 10 != c[t]) return false;
+    }
+    return true;
+  },
+  card(v) {
+    const d = digits(v);
+    if (d.length < 13) return false;
+    let sum = 0;
+    for (let i = 0; i < d.length; i++) {
+      let n = +d[d.length - 1 - i];
+      if (i % 2) { n *= 2; if (n > 9) n -= 9; }
+      sum += n;
+    }
+    return sum % 10 === 0;
+  },
+  val(v) {
+    const [m, a] = v.split('/').map(Number);
+    if (!m || m > 12 || a == null) return false;
+    const exp = new Date(2000 + a, m, 1);
+    return exp > new Date();
+  },
+  cvv: v => /^\d{3,4}$/.test(v),
+};
+
+function cardBrand(n) {
+  const d = digits(n);
+  if (/^(4011|4312|4389|4514|4576|5041|5066|5067|509|6277|6362|6363|650|6516|6550)/.test(d)) return 'ELO';
+  if (/^(606282|3841)/.test(d)) return 'HIPERCARD';
+  if (/^3[47]/.test(d)) return 'AMEX';
+  if (/^4/.test(d)) return 'VISA';
+  if (/^(5[1-5]|2[2-7])/.test(d)) return 'MASTERCARD';
+  return '';
+}
+
+/* ---------- estado ---------- */
+let cart = store.get('cart', []);
+let coupon = store.get('coupon', null);
+let ck = store.get('checkout', { step: 1, cliente: {}, entrega: {}, frete: null, metodo: 'pix' });
+let orders = store.get('orders', []);
+
+const saveCart = () => { store.set('cart', cart); store.set('coupon', coupon); updateCartCount(); };
+const saveCk = () => store.set('checkout', ck);
+const saveOrders = () => store.set('orders', orders);
+
+const unitPrice = item => prodById(item.id).preco + (MODELOS[item.modelo]?.acrescimo || 0);
+const subtotal = () => cart.reduce((s, i) => s + unitPrice(i) * i.qtd, 0);
+const itemCount = () => cart.reduce((s, i) => s + i.qtd, 0);
+
+function totals(metodo = ck.metodo, frete = ck.frete) {
+  const sub = subtotal();
+  let desc = 0, freteGratisCupom = false;
+  const c = coupon && CONFIG.cupons[coupon];
+  if (c) {
+    if (c.tipo === 'pct' && (!c.minimo || sub >= c.minimo)) desc = sub * c.valor;
+    if (c.tipo === 'frete') freteGratisCupom = true;
+  }
+  const base = sub - desc;
+  let fr = frete ? frete.valor : null;
+  if (frete && frete.id === 'pac' && (freteGratisCupom || base >= CONFIG.freteGratisAcima)) fr = 0;
+  const pix = metodo === 'pix' ? base * CONFIG.pixDesconto : 0;
+  const total = Math.max(0, base - pix + (fr || 0));
+  return { sub, desc, frete: fr, pix, total, base };
+}
+
+function parcelas(valor) {
+  const max = Math.max(1, Math.min(CONFIG.parcelasSemJuros, Math.floor(valor / CONFIG.parcelaMinima)));
+  return Array.from({ length: max }, (_, i) => ({ n: i + 1, v: valor / (i + 1) }));
+}
+
+/* ---------- frete ---------- */
+const CAPITAL_REGIAO = ['florianopolis', 'sao jose', 'palhoca', 'biguacu', 'santo amaro da imperatriz'];
+const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+
+function ufPorCep(cep) {
+  const n = +digits(cep).slice(0, 5);
+  const faixas = [[1000, 19999, 'SP'], [20000, 28999, 'RJ'], [29000, 29999, 'ES'], [30000, 39999, 'MG'], [40000, 48999, 'BA'], [49000, 49999, 'SE'], [50000, 56999, 'PE'], [57000, 57999, 'AL'], [58000, 58999, 'PB'], [59000, 59999, 'RN'], [60000, 63999, 'CE'], [64000, 64999, 'PI'], [65000, 65999, 'MA'], [66000, 68899, 'PA'], [69000, 69999, 'AM'], [70000, 73699, 'DF'], [72800, 76799, 'GO'], [77000, 77999, 'TO'], [78000, 78899, 'MT'], [79000, 79999, 'MS'], [80000, 87999, 'PR'], [88000, 89999, 'SC'], [90000, 99999, 'RS']];
+  return (faixas.find(([a, b]) => n >= a && n <= b) || [])[2] || '';
+}
+
+async function buscaCep(cep) {
+  const d = digits(cep);
+  try {
+    const r = await fetch(`https://viacep.com.br/ws/${d}/json/`);
+    const j = await r.json();
+    if (j.erro) return null;
+    return { rua: j.logradouro, bairro: j.bairro, cidade: j.localidade, uf: j.uf };
+  } catch {
+    return { rua: '', bairro: '', cidade: '', uf: ufPorCep(d) }; // offline: estima pela faixa
+  }
+}
+
+function opcoesFrete(end) {
+  const uf = end.uf;
+  const prod = 4; // dias úteis médios de produção, somados ao prazo dos Correios
+  let pac, sedex;
+  if (uf === 'SC') { pac = [14.9, 3, 5]; sedex = [24.9, 1, 2]; }
+  else if (['PR', 'RS', 'SP', 'RJ', 'MG', 'ES'].includes(uf)) { pac = [22.9, 5, 8]; sedex = [39.9, 2, 4]; }
+  else { pac = [29.9, 8, 12]; sedex = [54.9, 3, 6]; }
+  const ops = [
+    { id: 'pac', nome: 'PAC', valor: pac[0], prazo: `${pac[1] + prod} a ${pac[2] + prod} dias úteis` },
+    { id: 'sedex', nome: 'SEDEX', valor: sedex[0], prazo: `${sedex[1] + prod} a ${sedex[2] + prod} dias úteis` },
+  ];
+  if (uf === 'SC' && CAPITAL_REGIAO.includes(norm(end.cidade))) {
+    ops.unshift({ id: 'retirada', nome: 'Retirar / entrega combinada (Grande Floripa)', valor: 0, prazo: `pronto em ${CONFIG.prazoProducao}, combinamos pelo WhatsApp` });
+  }
+  return ops;
+}
+
+/* ---------- componentes ---------- */
+// foto real do Instagram; na coleção, recorta o modelo da posição escolhida
+function fotoHTML(p, perso = {}) {
+  const r = p.recortes && p.recortes[perso.posicao];
+  if (r) return `<div class="foto foto-crop" role="img" aria-label="${esc(p.nome)}, ${esc(perso.posicao)}" style="background-image:url('${p.foto}');background-position:${r[0]}% ${r[1]}%"></div>`;
+  return `<img class="foto" src="${p.foto}" alt="${esc(p.nome)}" loading="lazy">`;
+}
+
+function cardHTML(p) {
+  const cor = p.cores[0];
+  const pixPrice = p.preco * (1 - CONFIG.pixDesconto);
+  const parc = parcelas(p.preco).pop();
+  return `<a class="card" href="#/p/${p.id}">
+    <div class="media">
+      <div class="tags">${p.tag ? `<span class="pill">${esc(p.tag)}</span>` : ''}${p.precoDe ? `<span class="pill dark">-${Math.round((1 - p.preco / p.precoDe) * 100)}%</span>` : ''}</div>
+      ${fotoHTML(p)}
+    </div>
+    <div class="body">
+      <div class="name">${esc(p.nome)}</div>
+      <div class="price"><span class="now">${BRL(p.preco)}</span>${p.precoDe ? `<span class="old">${BRL(p.precoDe)}</span>` : ''}</div>
+      <div class="price-pix">${BRL(pixPrice)} no Pix</div>
+      <div class="price-parc">ou ${parc.n}x de ${BRL(parc.v)} sem juros</div>
+    </div>
+  </a>`;
+}
+
+function persoResumo(item) {
+  const p = prodById(item.id);
+  return (p.personalizacao || []).map(f => {
+    const v = item.perso?.[f.campo];
+    if (f.tipo === 'file') return v ? `<b>${esc(f.label)}:</b> enviada ✓` : '';
+    return v ? `<b>${esc(f.label.replace(/\s*\(.*\)/, ''))}:</b> ${esc(v)}` : '';
+  }).filter(Boolean).join(' · ');
+}
+
+function lineItemHTML(item, i, compact) {
+  const p = prodById(item.id);
+  const perso = persoResumo(item);
+  return `<div class="line-item">
+    <a class="thumbbox" href="#/p/${p.id}">${fotoHTML(p, item.perso)}</a>
+    <div>
+      <div style="font-weight:700">${esc(p.nome)}</div>
+      <div class="meta">${CORES[item.cor].nome} · ${MODELOS[item.modelo].nome} · <b>${item.tamanho}</b></div>
+      ${perso ? `<div class="meta">${perso}</div>` : ''}
+      ${compact ? '' : `<button class="rm" data-action="rm" data-i="${i}">Remover</button>`}
+    </div>
+    <div class="right">
+      <b>${BRL(unitPrice(item) * item.qtd)}</b>
+      <div class="qty">
+        <button data-action="qty" data-i="${i}" data-d="-1" aria-label="Diminuir">−</button>
+        <input value="${item.qtd}" readonly aria-label="Quantidade">
+        <button data-action="qty" data-i="${i}" data-d="1" aria-label="Aumentar">+</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function freeShipBar() {
+  const t = totals();
+  const falta = CONFIG.freteGratisAcima - t.base;
+  const pct = Math.min(100, (t.base / CONFIG.freteGratisAcima) * 100);
+  return `<div class="ship-bar">${falta > 0 ? `Faltam <b style="color:var(--gold)">${BRL(falta)}</b> para <b>frete grátis</b> ` : 'Você ganhou <b style="color:var(--ok)">frete grátis</b> (PAC)!'}
+    <div class="bar"><i style="width:${pct}%"></i></div></div>`;
+}
+
+function totalsHTML(t, opts = {}) {
+  return `<div class="totals">
+    <div><span>Subtotal (${itemCount()} ${itemCount() === 1 ? 'item' : 'itens'})</span><span>${BRL(t.sub)}</span></div>
+    ${t.desc ? `<div class="disc"><span>Cupom ${esc(coupon)}</span><span>− ${BRL(t.desc)}</span></div>` : ''}
+    <div><span>Frete</span><span>${t.frete == null ? '<span class="muted">calcular no checkout</span>' : t.frete === 0 ? '<b style="color:var(--ok)">Grátis</b>' : BRL(t.frete)}</span></div>
+    ${t.pix ? `<div class="disc"><span>Desconto Pix (5%)</span><span>− ${BRL(t.pix)}</span></div>` : ''}
+    <div class="grand"><span>Total</span><span>${BRL(t.total)}</span></div>
+    ${opts.hint !== false && !t.pix ? `<div class="price-pix" style="text-align:right">ou ${BRL(t.total - t.base * CONFIG.pixDesconto)} no Pix</div>` : ''}
+  </div>`;
+}
+
+function couponHTML() {
+  if (coupon) return `<div class="coupon-ok"><span>✓ Cupom <b>${esc(coupon)}</b>: ${esc(CONFIG.cupons[coupon].desc)}</span><button data-action="rmcoupon">remover</button></div>`;
+  return `<form class="coupon" data-form="coupon"><input name="code" placeholder="Cupom de desconto" aria-label="Cupom de desconto"><button class="btn btn-ghost">Aplicar</button></form>`;
+}
+
+/* ---------- sacola lateral ---------- */
+function updateCartCount() {
+  const el = $('#cartCount');
+  el.textContent = itemCount();
+  el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+}
+
+function renderDrawer() {
+  const body = $('#drawerBody'), foot = $('#drawerFoot');
+  if (!cart.length) {
+    body.innerHTML = `<div class="empty"><span class="e"></span>Sua sacola está vazia.<br><br><a class="btn btn-gold" href="#/c/todos" data-action="closedrawer">Ver camisetas</a></div>`;
+    foot.innerHTML = '';
+    return;
+  }
+  body.innerHTML = freeShipBar() + (window.Melhorias?.completarFrete() || '') + cart.map((it, i) => lineItemHTML(it, i)).join('');
+  foot.innerHTML = totalsHTML(totals(null, null)) +
+    `<a class="btn btn-gold btn-block" href="#/checkout" data-action="closedrawer">Finalizar compra</a>
+     <a class="btn btn-ghost btn-block" href="#/sacola" data-action="closedrawer">Ver sacola completa</a>`;
+}
+
+function openDrawer() {
+  renderDrawer();
+  $('#drawer').classList.add('open');
+  $('#drawer').setAttribute('aria-hidden', 'false');
+  $('#drawerBackdrop').hidden = false;
+}
+function closeDrawers() {
+  $('#drawer').classList.remove('open');
+  $('#drawer').setAttribute('aria-hidden', 'true');
+  $('#mobileMenu').classList.remove('open');
+  $('#mobileMenu').setAttribute('aria-hidden', 'true');
+  $('#drawerBackdrop').hidden = true;
+}
+
+/* ---------- páginas ---------- */
+const SLIDES = [
+  { p: 'paixao-pelo-futsal', tag: 'Feito sob encomenda', h: 'Personalize<br>seu estilo.', t: 'Produtos personalizados para você e para presentear, com nome, número ou foto.', cta: 'Ver esta camisa' },
+  { p: 'colecao-posicao', tag: 'Coleção Posição', h: 'Qual é a<br>sua posição?', t: 'Atacante, meia, zagueiro, lateral ou volante. Escolha a sua e coloque seu nome e número nas costas.', cta: 'Escolher a minha' },
+  { p: 'pet-personalizada', tag: 'Envie a foto', h: 'Seu pet<br>na sua camisa.', t: 'Mande uma foto dele. A gente desenha, coloca o nome e envia a arte para você aprovar.', cta: 'Criar a camisa do pet' },
+  { p: 'geracao-futebol', tag: 'Escolinhas e times de base', h: 'A camisa<br>da sua geração.', t: 'O ano de nascimento em destaque, para a turma inteira usar igual.', cta: 'Colocar o meu ano' },
+];
+const REELS = [
+  { r: 'DemHbAMOrwA', foto: 'img/geracao-futebol.webp', p: 'geracao-futebol' },
+  { r: 'DeupR4WuyRo', foto: 'img/respeito-e-a-regra.webp', p: 'respeito-e-a-regra' },
+  { r: 'Dem-SBDONY2', foto: 'img/viciados-para-jogar.webp', p: 'viciados-para-jogar' },
+  { r: 'De_uAjCupu_', foto: 'img/liesf-prensa.webp', legenda: 'Direto da prensa', sub: 'Peça um orçamento' },
+];
+const carousel = (id, inner) => `<div class="car"><button class="car-btn prev" data-action="car" data-t="${id}" data-d="-1" aria-label="Voltar">‹</button><div class="car-track" id="${id}">${inner}</div><button class="car-btn next" data-action="car" data-t="${id}" data-d="1" aria-label="Avançar">›</button></div>`;
+
+let heroTimer = null, heroIdx = 0;
+function heroGo(i) {
+  const slides = $$('.hb-slide');
+  if (!slides.length) return clearInterval(heroTimer);
+  heroIdx = (i + slides.length) % slides.length;
+  slides.forEach((s, n) => s.classList.toggle('active', n === heroIdx));
+  $$('.hb-dots button').forEach((d, n) => d.classList.toggle('active', n === heroIdx));
+}
+function heroStart() {
+  clearInterval(heroTimer);
+  heroIdx = 0;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  heroTimer = setInterval(() => heroGo(heroIdx + 1), 6000);
+}
+
+function pageHome() {
+  const orc = waLink('Olá! Quero um orçamento de camisas para o meu grupo.');
+  return `
+  <section class="hb" aria-label="Destaques">
+    ${SLIDES.map((s, i) => { const p = prodById(s.p); return `<div class="hb-slide ${i ? '' : 'active'}">
+      <div class="hb-bg" style="background-image:url('${p.foto}')"></div>
+      <div class="wrap hb-in">
+        <div class="hb-txt">
+          <span class="pill">${s.tag}</span>
+          <h${i ? 2 : 1} class="hb-h">${s.h}</h${i ? 2 : 1}>
+          <p>${s.t}</p>
+          <a class="btn btn-gold" href="#/p/${p.id}">${s.cta}</a>
+        </div>
+        <a class="hb-photo" href="#/p/${p.id}"><img src="${p.foto}" alt="${esc(p.nome)}"></a>
+      </div>
+    </div>`; }).join('')}
+    <div class="hb-dots">${SLIDES.map((s, i) => `<button data-action="herogo" data-v="${i}" class="${i ? '' : 'active'}" aria-label="Destaque ${i + 1}"></button>`).join('')}</div>
+  </section>
+
+  <div class="benef"><div class="wrap benef-in">
+    <div><b>Frete grátis</b><span>acima de ${BRL(CONFIG.freteGratisAcima)}</span></div>
+    <div><b>5% off no Pix</b><span>ou 6x sem juros no cartão</span></div>
+    <div><b>Sob encomenda</b><span>cada peça feita para você</span></div>
+    <div><b>Você aprova a arte</b><span>antes de ir para a prensa</span></div>
+  </div></div>
+
+  <section class="wrap quem">
+    <h2>Encontre a sua camisa.</h2>
+    <p class="muted">Para quem é o pedido?</p>
+    <div class="quem-grid">
+      <a href="#/c/todos">Pra mim</a>
+      <a href="#/p/colecao-posicao">Pro time</a>
+      <a href="#/c/presente">Pra presentear</a>
+      <a href="#/p/pet-personalizada">Pro meu pet</a>
+    </div>
+  </section>
+
+  <section class="wrap sec">
+    <div class="sec-head"><h2><i></i>A coleção</h2><a href="#/c/todos">Ver todas</a></div>
+    ${carousel('carNovo', PRODUTOS.map(cardHTML).join(''))}
+  </section>
+
+  <section class="wrap">
+    <div class="ocasiao">
+      <span>Compre por ocasião</span>
+      <a href="#/c/presente"><b>Presente</b> de aniversário →</a>
+      <a href="#/p/colecao-posicao"><b>Time</b> e escolinha →</a>
+      <a target="_blank" rel="noopener" href="${orc}"><b>Liga</b> e evento →</a>
+    </div>
+  </section>
+
+  <section class="wrap sec">
+    <div class="sec-head"><h2><i></i>Compre por categoria</h2></div>
+    <div class="cats-alta">${CATEGORIAS.map(c => `<a href="#/c/${c.id}"><span><img src="${c.foto}" alt="" loading="lazy"></span><b>${c.nome}</b></a>`).join('')}</div>
+  </section>
+
+  <section class="reels-sec"><div class="wrap sec">
+    <div class="sec-head"><h2><i></i>Direto do nosso Instagram</h2><a target="_blank" rel="noopener" href="https://www.instagram.com/${CONFIG.instagram}/">@${CONFIG.instagram}</a></div>
+    ${carousel('carReels', REELS.map(r => { const p = r.p && prodById(r.p); return `<div class="reel">
+      <a class="reel-v" target="_blank" rel="noopener" href="https://www.instagram.com/${CONFIG.instagram}/reel/${r.r}/" aria-label="Ver o vídeo no Instagram"><img src="${r.foto}" alt="" loading="lazy"><span class="play">▶</span></a>
+      ${p ? `<a class="reel-p" href="#/p/${p.id}"><span class="reel-t">${fotoHTML(p)}</span><span><b>${esc(p.nome)}</b><small>${BRL(p.preco)}</small></span></a>`
+          : `<a class="reel-p" target="_blank" rel="noopener" href="${orc}"><span class="reel-t"><img class="foto" src="${r.foto}" alt="" loading="lazy"></span><span><b>${r.legenda}</b><small>${r.sub}</small></span></a>`}
+    </div>`; }).join(''))}
+  </div></section>
+
+  <section class="wrap sec">
+    <div class="colecoes">
+      <a href="#/p/colecao-posicao" style="background-image:url('img/colecao-posicao.webp')"><div><b>Posição</b><p>uma arte para cada função em campo</p><span class="ver">ver mais</span></div></a>
+      <a href="#/p/respeito-e-a-regra" style="background-image:url('img/respeito-e-a-regra.webp')"><div><b>Respeito é a Regra</b><p>um recado para vestir dentro e fora de campo</p><span class="ver">ver mais</span></div></a>
+      <a href="#/p/camera-narracao-emocao" style="background-image:url('img/camera-narracao-emocao.webp')"><div><b>Ao vivo</b><p>para quem transmite o jogo</p><span class="ver">ver mais</span></div></a>
+    </div>
+  </section>
+
+  <section class="wrap sec">
+    <div class="destaque">
+      <img class="d-a" src="img/liesf-prensa.webp" alt="Camiseta preta da LIESF na prensa de estampar" loading="lazy">
+      <div class="d-b">
+        <h2>Produção própria,<br>da arte à prensa</h2>
+        <p class="muted">Fazemos uma peça ou o pedido inteiro: presente, time, liga e evento. Na foto, as camisas dos sócios fundadores da LIESF.</p>
+        <a class="btn btn-wpp" target="_blank" rel="noopener" href="${orc}">Pedir orçamento no WhatsApp</a>
+      </div>
+      <figure class="d-c"><img src="img/moletom-ao-vivo.webp" alt="Moletom branco com a arte Câmera, Narração, Emoção" loading="lazy"><figcaption>Câmera, Narração, Emoção, também em moletom.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="wrap sec">
+    <div class="sec-head"><h2><i></i>Como funciona</h2></div>
+    <div class="steps">
+      <div class="step"><b>Escolha e personalize</b><p>Nome, número, ano, nick ou a foto do seu pet, com a prévia na hora.</p></div>
+      <div class="step"><b>Pague com segurança</b><p>Pix com 5% off, cartão em até 6x sem juros ou boleto.</p></div>
+      <div class="step"><b>Aprove a arte</b><p>Enviamos a arte final no seu WhatsApp. Só produzimos depois do seu ok.</p></div>
+      <div class="step"><b>Receba em casa</b><p>Produção em ${CONFIG.prazoProducao}, mais o envio com código de rastreio.</p></div>
+    </div>
+  </section>`;
+}
+
+function pageList(cat, q) {
+  let items = PRODUTOS;
+  let titulo = 'Todas as camisetas';
+  if (cat && cat !== 'todos') { items = items.filter(p => p.categorias.includes(cat)); titulo = catById(cat)?.nome || titulo; }
+  if (q) { const n = norm(q); items = items.filter(p => norm(p.nome + ' ' + p.descricao + ' ' + p.categorias.join(' ')).includes(n)); titulo = `Busca: “${esc(q)}”`; }
+  const sort = sessionSort;
+  if (sort === 'menor') items = [...items].sort((a, b) => a.preco - b.preco);
+  if (sort === 'maior') items = [...items].sort((a, b) => b.preco - a.preco);
+  return `<div class="wrap">
+    <div class="list-head"><h1>${titulo}</h1><p class="muted">${items.length} ${items.length === 1 ? 'produto' : 'produtos'}</p></div>
+    <div class="filters">
+      <a class="chip ${!cat || cat === 'todos' ? 'active' : ''}" href="#/c/todos">Todas</a>
+      ${CATEGORIAS.map(c => `<a class="chip ${cat === c.id ? 'active' : ''}" href="#/c/${c.id}">${c.emoji} ${c.nome}</a>`).join('')}
+      <select data-action="sort" aria-label="Ordenar">
+        <option value="">Mais relevantes</option>
+        <option value="menor" ${sort === 'menor' ? 'selected' : ''}>Menor preço</option>
+        <option value="maior" ${sort === 'maior' ? 'selected' : ''}>Maior preço</option>
+      </select>
+    </div>
+    ${items.length ? `<div class="grid">${items.map(cardHTML).join('')}</div>` : `<div class="empty"><span class="e"></span>Nenhuma camisa encontrada.<br>Não achou o que queria? <a style="color:var(--gold)" target="_blank" rel="noopener" href="${waLink('Olá! Quero uma camisa personalizada com uma ideia minha.')}">Peça uma arte exclusiva no WhatsApp</a>.</div>`}
+  </div><div style="height:40px"></div>`;
+}
+let sessionSort = '';
+
+/* ----- página de produto ----- */
+let sel = null;
+
+function pageProduct(id) {
+  const p = prodById(id);
+  if (!p) return page404();
+  sel = window.Melhorias?.restaurar(id) || { id, cor: p.cores[0], modelo: 'adulto', tamanho: null, qtd: 1, perso: {} };
+  const cat = catById(p.categorias[0]);
+  return `<div class="wrap">
+    <div class="crumbs"><a href="#/">Início</a> / <a href="#/c/${cat.id}">${cat.nome}</a> / ${esc(p.nome)}</div>
+    <div class="pdp2">
+      <div class="gal" id="gal"></div>
+      <div class="info">
+        ${p.tag ? `<span class="pill">${esc(p.tag)}</span>` : ''}
+        <h1>${esc(p.nome)}</h1>
+        <div class="preco">
+          <div id="pdpPix"></div>
+          <div class="price-parc" id="pdpParc"></div>
+        </div>
+        <div class="entrega-prev" id="entregaPrev"></div>
+
+        <div class="opt">
+          <div class="opt-label">Cor: <span id="corNome" class="val"></span></div>
+          <div class="colors">${p.cores.map(c => `<button class="color" data-action="cor" data-v="${c}" style="background:${CORES[c].hex}" aria-label="${CORES[c].nome}" title="${CORES[c].nome}"></button>`).join('')}</div>
+        </div>
+        <div class="opt">
+          <div class="opt-label">Modelo</div>
+          <div class="seg">${Object.entries(MODELOS).map(([k, m]) => `<button data-action="modelo" data-v="${k}">${m.nome}${m.acrescimo ? ` <small>(${m.acrescimo < 0 ? '−' : '+'}${BRL(Math.abs(m.acrescimo))})</small>` : ''}</button>`).join('')}</div>
+        </div>
+        <div class="opt">
+          <div class="opt-label">Escolha um tamanho <span><button class="link tam-link" data-m="tam-ajuda">Qual é o meu tamanho?</button> <a href="#/ajuda/medidas">Tabela de medidas</a></span></div>
+          <div class="sizes" id="sizes"></div>
+          <div class="tam-ajuda" id="tamAjuda" hidden></div>
+        </div>
+
+        ${p.personalizacao ? `<div class="perso opt">
+          <h4>Personalize a sua <span class="muted" style="font-weight:500;font-size:13px">(as imagens atualizam ao vivo)</span></h4>
+          ${p.personalizacao.map(persoFieldHTML).join('')}
+        </div>` : ''}
+
+        <div class="field">
+          <label for="obs">Observações para a arte (opcional)</label>
+          <textarea id="obs" rows="2" data-perso="obs" maxlength="200" placeholder="Ex.: nome em dourado, número menor"></textarea>
+        </div>
+
+        <div class="buy-row">
+          <div class="qty">
+            <button data-action="pqty" data-d="-1" aria-label="Diminuir">−</button>
+            <input id="pqty" value="1" readonly aria-label="Quantidade">
+            <button data-action="pqty" data-d="1" aria-label="Aumentar">+</button>
+          </div>
+          <button class="btn btn-gold" data-action="add">Adicionar à sacola</button>
+        </div>
+        ${p.personalizacao ? `<button class="btn btn-ghost btn-previa" data-m="compartilhar"><svg viewBox="0 0 32 32" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3z"/></svg>Mandar a prévia para alguém</button>` : ''}
+
+        <ul class="chips">
+          <li>Feita sob encomenda</li>
+          <li>Arte aprovada por você</li>
+          <li>Produção em ${CONFIG.prazoProducao}</li>
+          <li>Envio com rastreio</li>
+        </ul>
+
+        <div class="kit" id="kit">
+          <div><b>Monte o kit do time</b><span>Mande a lista com nome, número e tamanho de cada um.</span></div>
+          <a class="btn btn-wpp" target="_blank" rel="noopener" href="${waLink(`Olá! Quero um orçamento de ${p.nome} para o meu time.`)}">Pedir orçamento</a>
+        </div>
+
+        <div class="opt">
+          <div class="opt-label">Calcular frete</div>
+          <form class="ship-calc" data-form="shipcalc">
+            <div class="field" style="flex:1;margin:0"><input name="cep" inputmode="numeric" placeholder="00000-000" data-mask="cep" aria-label="CEP"></div>
+            <button class="btn btn-ghost">OK</button>
+          </form>
+          <div class="ship-res" id="shipRes"></div>
+        </div>
+
+        <details class="acc" open><summary>Descrição</summary><p>${esc(p.descricao)}</p></details>
+        <details class="acc"><summary>Cuidados com a sua peça</summary><ul><li>Lavar do avesso, em água fria</li><li>Não usar alvejante</li><li>Não passar ferro sobre a estampa</li></ul></details>
+        <details class="acc"><summary>Trocas</summary><p>Produtos personalizados não têm troca por arrependimento, mas trocamos sem custo em caso de defeito ou erro nosso na personalização. <a href="#/ajuda/trocas" style="color:var(--gold)">Política completa</a>.</p></details>
+      </div>
+    </div>
+
+    <section class="sec">
+      <div class="sec-head"><h2><i></i>Combina com</h2></div>
+      ${carousel('carRel', PRODUTOS.filter(x => x.id !== p.id && x.categorias.some(c => p.categorias.includes(c))).concat(PRODUTOS.filter(x => x.id !== p.id)).filter((x, i, a) => a.indexOf(x) === i).slice(0, 6).map(cardHTML).join(''))}
+    </section>
+  </div>`;
+}
+
+function persoFieldHTML(f) {
+  const req = f.obrigatorio ? ' *' : '';
+  if (f.tipo === 'select') {
+    return `<div class="field" data-field="${f.campo}"><label>${esc(f.label)}${req}</label>
+      <select data-perso="${f.campo}"><option value="">Selecione…</option>${f.opcoes.map(o => `<option>${esc(o)}</option>`).join('')}</select>
+      <span class="err">Escolha uma opção</span></div>`;
+  }
+  if (f.tipo === 'file') {
+    return `<div class="field" data-field="${f.campo}"><label>${esc(f.label)}${req}</label>
+      <label class="upload"><span id="upPrev" style="font-size:28px"></span><span><b>Enviar foto</b><br><small class="muted">JPG ou PNG, de preferência com o pet de frente e boa luz</small></span>
+      <input type="file" accept="image/*" data-perso-file="${f.campo}"></label>
+      <span class="err">Envie a foto para criarmos a arte</span></div>`;
+  }
+  return `<div class="field" data-field="${f.campo}"><label>${esc(f.label)}${req}</label>
+    <input data-perso="${f.campo}" ${f.tipo === 'number' ? 'inputmode="numeric"' : ''} maxlength="${f.max || 20}" placeholder="${esc(f.placeholder || '')}">
+    <span class="err">Campo obrigatório</span></div>`;
+}
+
+function viewsDe(p) {
+  if (window.Melhorias?.usa3D(p)) return ['foto', '3d']; // Melhorias: camisa 3D no lugar das prévias planas
+  const v = ['foto'];
+  if (p.previa) v.push('previa');
+  if (p.costas) v.push('costas');
+  return v;
+}
+const VIEW_NOME = { foto: 'Foto', previa: 'Sua prévia', costas: 'Suas costas', '3d': 'Sua camisa em 3D' };
+function viewHTML(p, v) {
+  if (v === 'foto') return fotoHTML(p, sel.perso);
+  return v === 'previa' ? Tee.frente(p, sel.cor, sel.perso) : Tee.costas(p, sel.cor, sel.perso);
+}
+
+function refreshProduct() {
+  const p = prodById(sel.id);
+  const vs = viewsDe(p);
+  const gal = $('#gal');
+  gal.className = 'gal' + (vs.length < 2 ? ' single' : '');
+  if (gal.dataset.prod !== p.id) { // a foto só é redesenhada quando muda, para não piscar a cada tecla
+    gal.dataset.prod = p.id;
+    gal.innerHTML = vs.map(v => `<figure class="gal-i ${v === 'foto' ? 'is-foto' : 'is-svg'}" data-v="${v}"><div class="gal-m"></div><figcaption>${VIEW_NOME[v]}</figcaption></figure>`).join('');
+    gal.dataset.pos = '-';
+  }
+  vs.forEach(v => {
+    if (v === '3d') return; // Melhorias: o 3D se atualiza sozinho
+    if (v === 'foto' && gal.dataset.pos === String(sel.perso.posicao)) return;
+    $(`[data-v="${v}"] .gal-m`, gal).innerHTML = viewHTML(p, v);
+  });
+  gal.dataset.pos = String(sel.perso.posicao);
+  $$('.color').forEach(b => b.classList.toggle('active', b.dataset.v === sel.cor));
+  $('#corNome').textContent = CORES[sel.cor].nome;
+  $$('.seg button').forEach(b => b.classList.toggle('active', b.dataset.v === sel.modelo));
+  const m = MODELOS[sel.modelo];
+  if (!m.tamanhos.includes(sel.tamanho)) sel.tamanho = null;
+  $('#sizes').innerHTML = m.tamanhos.map(t => `<button class="size ${sel.tamanho === t ? 'active' : ''}" data-action="tam" data-v="${t}">${t}</button>`).join('');
+  const preco = p.preco + m.acrescimo;
+  $('#pdpPix').innerHTML = `<b>${BRL(preco * (1 - CONFIG.pixDesconto))}</b> <span class="off">5% off no Pix</span>`;
+  const parc = parcelas(preco).pop();
+  $('#pdpParc').textContent = `ou ${BRL(preco)} em até ${parc.n}x de ${BRL(parc.v)} sem juros`;
+  $('#pqty').value = sel.qtd;
+  window.Melhorias?.produto(p);
+}
+
+function validateSel() {
+  const p = prodById(sel.id);
+  let ok = true, first = null;
+  if (!sel.tamanho) { ok = false; toast('Escolha o tamanho '); first = $('#sizes'); first.classList.remove('chamar'); void first.offsetWidth; first.classList.add('chamar'); }
+  (p.personalizacao || []).forEach(f => {
+    const el = $(`[data-field="${f.campo}"]`);
+    const v = f.tipo === 'file' ? sel.perso.fotoData : sel.perso[f.campo];
+    const bad = f.obrigatorio && !(v && String(v).trim());
+    el.classList.toggle('invalid', !!bad); // !!: sem isso, campo opcional alternava entre válido e inválido
+    if (bad) { ok = false; first = first || el; }
+  });
+  if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (!ok && sel.tamanho) toast('Preencha a personalização ');
+  return ok;
+}
+
+function addSelToCart() {
+  if (!validateSel()) return false;
+  const perso = { ...sel.perso };
+  Object.keys(perso).forEach(k => { if (!String(perso[k]).trim()) delete perso[k]; });
+  const key = JSON.stringify([sel.id, sel.cor, sel.modelo, sel.tamanho, perso]);
+  const ex = cart.find(i => i.key === key);
+  if (ex) ex.qtd += sel.qtd;
+  else cart.push({ key, id: sel.id, cor: sel.cor, modelo: sel.modelo, tamanho: sel.tamanho, qtd: sel.qtd, perso });
+  saveCart();
+  window.Melhorias?.aoAdicionar({ ...sel, perso });
+  return true;
+}
+
+function resizeImage(file) {
+  return new Promise((res, rej) => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const max = 360, k = Math.min(1, max / Math.max(img.width, img.height));
+        const c = document.createElement('canvas');
+        c.width = img.width * k; c.height = img.height * k;
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        res(c.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = rej;
+      img.src = fr.result;
+    };
+    fr.onerror = rej;
+    fr.readAsDataURL(file);
+  });
+}
+
+/* ----- sacola (página) ----- */
+function pageCart() {
+  if (!cart.length) return `<div class="wrap"><div class="empty" style="padding:100px 0"><span class="e"></span><h2>Sua sacola está vazia</h2><p>Que tal criar uma camisa com o seu nome?</p><br><a class="btn btn-gold" href="#/c/todos">Ver camisetas</a></div></div>`;
+  return `<div class="wrap">
+    <div class="page-title"><h1>Sua sacola</h1></div>
+    <div class="layout-2">
+      <div class="panel">${freeShipBar()}${window.Melhorias?.completarFrete() || ''}${cart.map((it, i) => lineItemHTML(it, i)).join('')}
+        <a href="#/c/todos" class="btn btn-ghost" style="margin-top:16px">← Continuar comprando</a></div>
+      <div class="panel summary">
+        <h3>Resumo</h3>
+        ${couponHTML()}
+        ${totalsHTML(totals(null, null))}
+        <a class="btn btn-gold btn-block" href="#/checkout" style="margin-top:16px">Finalizar compra</a>
+        <div class="secure">Ambiente seguro</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ----- checkout ----- */
+function pageCheckout() {
+  if (!cart.length) { location.hash = '#/sacola'; return ''; }
+  const c = ck.cliente, e = ck.entrega;
+  const st = ck.step;
+  const t = totals();
+  const fretes = e.uf ? opcoesFrete(e) : [];
+
+  const step1 = st === 1 ? `
+    <form class="content" data-form="ck1" novalidate>
+      <div class="field"><label>E-mail</label><input name="email" type="email" autocomplete="email" value="${esc(c.email)}" placeholder="voce@email.com"><span class="err">Informe um e-mail válido</span></div>
+      <div class="field"><label>Nome completo</label><input name="nome" autocomplete="name" value="${esc(c.nome)}"><span class="err">Informe nome e sobrenome</span></div>
+      <div class="row">
+        <div class="field"><label>CPF</label><input name="cpf" inputmode="numeric" data-mask="cpf" value="${esc(c.cpf)}" placeholder="000.000.000-00"><span class="err">CPF inválido</span></div>
+        <div class="field"><label>WhatsApp</label><input name="tel" inputmode="tel" autocomplete="tel" data-mask="tel" value="${esc(c.tel)}" placeholder="(48) 99999-9999"><span class="err">Informe um telefone com DDD</span></div>
+      </div>
+      <p class="muted" style="font-size:12.5px;margin-top:0">Vamos enviar a arte para aprovação neste WhatsApp.</p>
+      <button class="btn btn-gold btn-block">Continuar para entrega</button>
+    </form>` : st > 1 ? `<div class="done-info">${esc(c.nome)} · ${esc(c.email)} · ${esc(c.tel)}</div>` : '';
+
+  const step2 = st === 2 ? `
+    <form class="content" data-form="ck2" novalidate>
+      <div class="row">
+        <div class="field"><label>CEP</label><input name="cep" inputmode="numeric" autocomplete="postal-code" data-mask="cep" value="${esc(e.cep)}" placeholder="00000-000" data-action-input="cep"><span class="err">CEP inválido</span></div>
+        <div class="field" style="justify-content:end"><a class="muted" style="font-size:13px;padding-bottom:12px" target="_blank" rel="noopener" href="https://buscacepinter.correios.com.br/app/endereco/index.php">Não sei meu CEP</a></div>
+      </div>
+      <div id="addrFields" ${e.uf ? '' : 'hidden'}>
+        <div class="field"><label>Rua / Avenida</label><input name="rua" autocomplete="address-line1" value="${esc(e.rua)}"><span class="err">Informe a rua</span></div>
+        <div class="row-3">
+          <div class="field"><label>Bairro</label><input name="bairro" value="${esc(e.bairro)}"><span class="err">Informe o bairro</span></div>
+          <div class="field"><label>Número</label><input name="num" value="${esc(e.num)}"><span class="err">Obrigatório</span></div>
+          <div class="field"><label>Complemento</label><input name="comp" value="${esc(e.comp)}" placeholder="Apto, bloco"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Cidade</label><input name="cidade" value="${esc(e.cidade)}"><span class="err">Informe a cidade</span></div>
+          <div class="field"><label>UF</label><input name="uf" maxlength="2" value="${esc(e.uf)}" style="text-transform:uppercase"><span class="err">UF</span></div>
+        </div>
+        <div class="opt-label" style="margin-top:6px">Forma de entrega</div>
+        <div id="freteOps">${fretesHTML(fretes)}</div>
+      </div>
+      <button class="btn btn-gold btn-block" style="margin-top:8px">Continuar para pagamento</button>
+    </form>` : st > 2 ? `<div class="done-info">${esc(e.rua)}, ${esc(e.num)}${e.comp ? ', ' + esc(e.comp) : ''} · ${esc(e.bairro)} · ${esc(e.cidade)}/${esc(e.uf)} · ${mask.cep(e.cep)}<br>${esc(ck.frete?.nome)} · ${ck.frete && t.frete === 0 ? 'Grátis' : BRL(t.frete || 0)} · ${esc(ck.frete?.prazo)}</div>` : '';
+
+  const step3 = st === 3 ? `<div class="content">${payHTML(t)}</div>` : '';
+
+  const stepBox = (n, title, inner) => `<div class="panel ck-step ${st < n ? 'locked' : ''}">
+    <div class="head"><h3><span>${st > n ? '✓' : n}</span>${title}</h3>${st > n ? `<button class="edit-link" data-action="ckstep" data-v="${n}">Alterar</button>` : ''}</div>${inner}</div>`;
+
+  return `<div class="wrap">
+    <div class="page-title"><h1>Finalizar compra</h1></div>
+    <div class="progress"><div data-n="1" class="done">Sacola</div><div data-n="2" class="${st > 1 ? 'done' : 'cur'}">Identificação</div><div data-n="3" class="${st > 2 ? 'done' : st === 2 ? 'cur' : ''}">Entrega</div><div data-n="4" class="${st === 3 ? 'cur' : ''}">Pagamento</div></div>
+    <div class="layout-2">
+      <div>
+        ${stepBox(1, 'Identificação', step1)}
+        ${stepBox(2, 'Entrega', step2)}
+        ${stepBox(3, 'Pagamento', step3)}
+      </div>
+      <div class="panel summary" id="ckSummary">${ckSummaryHTML(t)}</div>
+    </div>
+  </div>`;
+}
+
+function ckSummaryHTML(t) {
+  return `<h3>Resumo do pedido</h3>
+    <div class="mini-items">${cart.map(it => {
+      const p = prodById(it.id);
+      return `<div class="mini-item"><div class="thumbbox">${fotoHTML(p, it.perso)}<span class="q">${it.qtd}</span></div>
+        <div><b>${esc(p.nome)}</b><div class="muted" style="font-size:12px">${CORES[it.cor].nome} · ${MODELOS[it.modelo].nome} ${it.tamanho}</div></div>
+        <div>${BRL(unitPrice(it) * it.qtd)}</div></div>`;
+    }).join('')}</div>
+    ${couponHTML()}
+    ${totalsHTML(t, { hint: ck.metodo !== 'pix' })}
+    <div class="secure">Pagamento seguro · Seus dados são protegidos</div>
+    <a href="#/sacola" class="muted" style="display:block;text-align:center;font-size:13px;margin-top:8px">Editar sacola</a>`;
+}
+
+function fretesHTML(fretes) {
+  if (!fretes.length) return '';
+  const t = totals(ck.metodo, null);
+  const freeAble = t.base >= CONFIG.freteGratisAcima || (coupon && CONFIG.cupons[coupon]?.tipo === 'frete');
+  if (!ck.frete || !fretes.find(f => f.id === ck.frete.id)) ck.frete = fretes[0];
+  return fretes.map(f => {
+    const val = f.id === 'pac' && freeAble ? 0 : f.valor;
+    return `<label class="radio-card ${ck.frete.id === f.id ? 'active' : ''}">
+      <input type="radio" name="frete" value="${f.id}" ${ck.frete.id === f.id ? 'checked' : ''} data-action-change="frete">
+      <div class="grow"><b>${esc(f.nome)}</b><small>${esc(f.prazo)}</small></div>
+      <b>${val === 0 ? '<span style="color:var(--ok)">Grátis</span>' : BRL(val)}</b></label>`;
+  }).join('');
+}
+
+function payHTML(t) {
+  const m = ck.metodo;
+  const base = totals('cartao');
+  const ps = parcelas(base.total);
+  const tab = (id, label, sub) => `<button class="pay-tab ${m === id ? 'active' : ''}" data-action="metodo" data-v="${id}">${label}${sub ? `<small>${sub}</small>` : ''}</button>`;
+  let body = '';
+  if (m === 'pix') {
+    body = `<div class="radio-card active" style="cursor:default"><span style="font-size:28px"></span><div class="grow"><b>Pague com Pix e ganhe 5% OFF</b><small>Aprovação na hora. O QR Code aparece na próxima tela e vale por 30 minutos.</small></div></div>
+      <div class="totals" style="margin:14px 0"><div class="grand"><span>Total no Pix</span><span style="color:var(--ok)">${BRL(t.total)}</span></div></div>
+      <button class="btn btn-gold btn-block" data-action="finalizar">Gerar Pix</button>`;
+  } else if (m === 'cartao') {
+    body = `<form data-form="card" novalidate>
+      ${Pagamento.demo ? `<div class="demo-note">Demonstração: use o cartão de teste <b>4111 1111 1111 1111</b>, validade 12/30, CVV 123. Nada é cobrado e os dados não saem do seu navegador.</div>` : ''}
+      <div class="field card-input"><label>Número do cartão</label><input name="num" inputmode="numeric" autocomplete="cc-number" data-mask="card" placeholder="0000 0000 0000 0000"><span class="brand" id="brand"></span><span class="err">Número de cartão inválido</span></div>
+      <div class="field"><label>Nome impresso no cartão</label><input name="nome" autocomplete="cc-name" style="text-transform:uppercase"><span class="err">Informe o nome</span></div>
+      <div class="row">
+        <div class="field"><label>Validade</label><input name="val" inputmode="numeric" autocomplete="cc-exp" data-mask="val" placeholder="MM/AA"><span class="err">Validade inválida</span></div>
+        <div class="field"><label>CVV</label><input name="cvv" inputmode="numeric" autocomplete="cc-csc" data-mask="cvv" placeholder="123"><span class="err">CVV inválido</span></div>
+      </div>
+      <div class="field"><label>Parcelas</label><select name="parc">${ps.map(p => `<option value="${p.n}">${p.n}x de ${BRL(p.v)} sem juros${p.n === 1 ? ' (à vista)' : ''}</option>`).join('')}</select></div>
+      <button class="btn btn-gold btn-block">Pagar ${BRL(base.total)}</button>
+    </form>`;
+  } else {
+    body = `<div class="radio-card active" style="cursor:default"><span style="font-size:28px"></span><div class="grow"><b>Boleto bancário</b><small>Vence em 3 dias úteis. A compensação leva até 2 dias úteis e a produção começa após a confirmação.</small></div></div>
+      <div class="totals" style="margin:14px 0"><div class="grand"><span>Total no boleto</span><span>${BRL(t.total)}</span></div></div>
+      <button class="btn btn-gold btn-block" data-action="finalizar">Gerar boleto</button>`;
+  }
+  return `<div class="pay-tabs">${tab('pix', 'Pix', '5% OFF')}${tab('cartao', 'Cartão', `até ${CONFIG.parcelasSemJuros}x s/ juros`)}${tab('boleto', 'Boleto', '')}</div>${body}
+    <p class="muted" style="font-size:12px;margin-top:14px">Ao finalizar você concorda com a <a href="#/ajuda/trocas" style="color:var(--gold)">política de trocas</a> e a <a href="#/ajuda/privacidade" style="color:var(--gold)">política de privacidade</a>.</p>`;
+}
+
+function setFieldErr(form, name, bad) {
+  const f = form.elements[name]?.closest('.field');
+  if (f) f.classList.toggle('invalid', !!bad);
+  return !bad;
+}
+
+/* ----- pagamento (adaptador) -----
+   MODO DEMONSTRAÇÃO: os pagamentos são simulados no navegador.
+   Para produção, troque estas funções por chamadas ao seu backend,
+   que cria a cobrança no gateway (ex.: Mercado Pago, Pagar.me, Asaas)
+   e recebe a confirmação via webhook. NUNCA processe cartão no front-end
+   sem a tokenização do gateway (o número do cartão não deve tocar seu servidor). */
+const Pagamento = {
+  demo: true,
+  async cartao(order, card) {
+    await new Promise(r => setTimeout(r, 1800));
+    // Para testar recusa: use um cartão que termine em 0002 (ex.: 4000 0000 0000 0002)
+    if (digits(card.num).endsWith('0002')) return { ok: false, motivo: 'Pagamento recusado pelo emissor. Tente outro cartão ou pague com Pix.' };
+    return { ok: true, autorizacao: String(Math.floor(Math.random() * 1e6)).padStart(6, '0') };
+  },
+  pix(order) {
+    return { payload: pixPayload(order.totais.total, order.id), expira: Date.now() + 30 * 60 * 1000 };
+  },
+  boleto(order) {
+    const r = () => String(Math.floor(Math.random() * 1e5)).padStart(5, '0');
+    const venc = new Date(); venc.setDate(venc.getDate() + 3);
+    return { linha: `23793.${r()} ${r()}.${r()}${r().slice(0, 1)} ${r()}.${r()}${r().slice(0, 1)} 1 ${String(Math.round(order.totais.total * 100)).padStart(14, '0')}`, vencimento: venc.toISOString() };
+  },
+};
+
+/* Pix "copia e cola" no padrão BR Code (EMV) com CRC16 */
+function pixPayload(valor, txid) {
+  const f = (id, v) => id + String(v.length).padStart(2, '0') + v;
+  const clean = s => norm(s).toUpperCase().replace(/[^A-Z0-9 ]/g, '');
+  let p = f('00', '01') +
+    f('26', f('00', 'br.gov.bcb.pix') + f('01', CONFIG.pixChave)) +
+    f('52', '0000') + f('53', '986') + f('54', valor.toFixed(2)) + f('58', 'BR') +
+    f('59', clean(CONFIG.pixRecebedor).slice(0, 25)) + f('60', clean(CONFIG.cidade).slice(0, 15)) +
+    f('62', f('05', txid.replace(/[^A-Za-z0-9]/g, '').slice(0, 25))) + '6304';
+  let crc = 0xFFFF;
+  for (let i = 0; i < p.length; i++) {
+    crc ^= p.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) & 0xFFFF : (crc << 1) & 0xFFFF;
+  }
+  return p + crc.toString(16).toUpperCase().padStart(4, '0');
+}
+
+function novoPedido(extra = {}) {
+  const t = totals();
+  const id = 'BBS' + String(Date.now()).slice(-6);
+  const order = {
+    id, criado: new Date().toISOString(),
+    cliente: { ...ck.cliente }, entrega: { ...ck.entrega }, frete: { ...ck.frete },
+    itens: cart.map(i => ({ ...i, nome: prodById(i.id).nome, unit: unitPrice(i) })),
+    cupom: coupon, totais: t, metodo: ck.metodo, status: 'pendente',
+    historico: [{ s: 'Pedido recebido', d: new Date().toISOString() }],
+    ...extra,
+  };
+  return order;
+}
+
+function concluirPedido(order) {
+  window.Melhorias?.aoConcluir(order);
+  orders.unshift(order);
+  saveOrders();
+  cart = []; coupon = null; saveCart();
+  ck.step = 1; ck.frete = null; saveCk();
+  location.hash = `#/pedido/${order.id}`;
+}
+
+function marcarPago(order, via) {
+  order.status = 'pago';
+  order.historico.push({ s: `Pagamento aprovado (${via})`, d: new Date().toISOString() });
+  saveOrders();
+}
+
+async function finalizar(cardForm) {
+  const metodo = ck.metodo;
+  window.Melhorias?.aoPagar(metodo);
+  if (metodo === 'cartao') {
+    const fd = Object.fromEntries(new FormData(cardForm));
+    const ok = [
+      setFieldErr(cardForm, 'num', !valid.card(fd.num)),
+      setFieldErr(cardForm, 'nome', fd.nome.trim().length < 3),
+      setFieldErr(cardForm, 'val', !valid.val(fd.val)),
+      setFieldErr(cardForm, 'cvv', !valid.cvv(fd.cvv)),
+    ].every(Boolean);
+    if (!ok) return;
+    const order = novoPedido({ pagamento: { bandeira: cardBrand(fd.num) || 'CARTÃO', final: digits(fd.num).slice(-4), parcelas: +fd.parc } });
+    const content = cardForm.closest('.content');
+    content.innerHTML = `<div style="text-align:center;padding:30px 0"><div class="spinner"></div><b>Processando pagamento…</b><p class="muted">Não feche esta página.</p></div>`;
+    const r = await Pagamento.cartao(order, fd);
+    if (!r.ok) {
+      content.innerHTML = `<div class="demo-note" style="color:var(--err);border-color:#ff5a5288;background:#ff5a5214">${esc(r.motivo)}</div>` + payHTML(totals());
+      return;
+    }
+    order.pagamento.autorizacao = r.autorizacao;
+    marcarPago(order, `${order.pagamento.bandeira} final ${order.pagamento.final}, ${order.pagamento.parcelas}x`);
+    concluirPedido(order);
+  } else if (metodo === 'pix') {
+    const order = novoPedido();
+    order.pix = Pagamento.pix(order);
+    concluirPedido(order);
+  } else {
+    const order = novoPedido();
+    order.boleto = Pagamento.boleto(order);
+    concluirPedido(order);
+  }
+}
+
+/* ----- página do pedido ----- */
+let pixTimer = null;
+
+function pageOrder(id) {
+  const o = orders.find(x => x.id === id);
+  if (!o) return `<div class="wrap"><div class="empty" style="padding:100px 0"><span class="e"></span><h2>Pedido não encontrado</h2><p>Os pedidos ficam salvos neste aparelho. Se comprou em outro, fale com a gente.</p><br><a class="btn btn-gold" href="#/pedidos">Meus pedidos</a></div></div>`;
+  const pago = o.status === 'pago';
+  const first = o.cliente.nome.split(' ')[0];
+  const t = o.totais;
+
+  let top = '';
+  if (pago) {
+    top = `<div class="order-hero"><span class="big"></span><h1>Pedido confirmado, ${esc(first)}!</h1>
+      <p class="muted">Pedido <b style="color:var(--text)">#${o.id}</b> · enviamos os detalhes para <b style="color:var(--text)">${esc(o.cliente.email)}</b></p></div>`;
+  } else if (o.metodo === 'pix') {
+    top = `<div class="order-hero"><span class="big"></span><h1>Falta pouco, ${esc(first)}!</h1><p class="muted">Pague o Pix para confirmar o pedido <b style="color:var(--text)">#${o.id}</b></p></div>
+    <div class="panel" style="max-width:760px;margin:0 auto 24px">
+      <div class="pix-box">
+        <div class="qr" id="qr"></div>
+        <div>
+          <div class="muted" style="font-size:13px">Valor</div>
+          <div style="font-size:28px;font-weight:800;color:var(--ok)">${BRL(t.total)}</div>
+          <div class="muted" style="font-size:13px;margin-top:10px">Expira em</div>
+          <div class="timer" id="pixTimer">30:00</div>
+          <ol class="muted" style="font-size:13px;padding-left:18px">
+            <li>Abra o app do seu banco e escolha <b>Pix › Ler QR Code</b></li>
+            <li>Ou copie o código abaixo e use <b>Pix Copia e Cola</b></li>
+          </ol>
+          <div class="copy"><input id="pixCode" readonly value="${esc(o.pix.payload)}" aria-label="Código Pix copia e cola"><button class="btn btn-gold" data-action="copy" data-target="pixCode">Copiar</button></div>
+        </div>
+      </div>
+      ${Pagamento.demo ? `<div class="demo-note"><b>Modo demonstração:</b> nenhum valor é cobrado e a chave Pix ainda não foi configurada (data.js → pixChave). Em produção, a confirmação chega sozinha pelo webhook do banco. <button class="btn btn-ghost" style="padding:6px 12px;margin-left:6px" data-action="simpay" data-v="${o.id}">Simular pagamento recebido</button></div>` : ''}
+    </div>`;
+  } else if (o.metodo === 'boleto') {
+    top = `<div class="order-hero"><span class="big"></span><h1>Boleto gerado!</h1><p class="muted">Pedido <b style="color:var(--text)">#${o.id}</b> · vence em ${new Date(o.boleto.vencimento).toLocaleDateString('pt-BR')}</p></div>
+    <div class="panel" style="max-width:760px;margin:0 auto 24px">
+      <div class="muted" style="font-size:13px">Linha digitável</div>
+      <div class="copy" style="margin:8px 0 14px"><input id="boletoCode" readonly value="${esc(o.boleto.linha)}"><button class="btn btn-gold" data-action="copy" data-target="boletoCode">Copiar</button></div>
+      <p class="muted" style="font-size:13px">A produção começa assim que o banco confirmar o pagamento (até 2 dias úteis).</p>
+      ${Pagamento.demo ? `<div class="demo-note"><b>Modo demonstração:</b> boleto fictício. <button class="btn btn-ghost" style="padding:6px 12px;margin-left:6px" data-action="simpay" data-v="${o.id}">Simular compensação</button></div>` : ''}
+    </div>`;
+  }
+
+  const etapas = [
+    ['Pedido recebido', 'Recebemos seu pedido'],
+    ['Pagamento aprovado', pago ? 'Pagamento confirmado' : 'Aguardando pagamento'],
+    ['Arte para aprovação', 'Enviamos a arte no seu WhatsApp'],
+    ['Em produção', `Prazo: ${CONFIG.prazoProducao}`],
+    ['Enviado', o.frete.id === 'retirada' ? 'Combinamos a entrega/retirada' : 'Você recebe o código de rastreio'],
+    ['Entregue', o.frete.prazo],
+  ];
+  const nowIdx = pago ? 2 : 1;
+  const wpp = waLink(`Olá! Fiz o pedido #${o.id} na BBS Store.\n` + o.itens.map(i => `• ${i.qtd}x ${i.nome}, ${CORES[i.cor].nome}, ${MODELOS[i.modelo].nome} ${i.tamanho}${persoTexto(i)}`).join('\n') + `\nTotal: ${BRL(t.total)}\n${o.itens.some(i => i.perso?.fotoData) ? 'Vou enviar a foto do pet aqui em alta resolução. ' : ''}Aguardo a arte para aprovar!`);
+
+  return `<div class="wrap">
+    ${top}
+    <div class="layout-2" style="padding-bottom:60px">
+      <div style="display:grid;gap:16px">
+        ${pago ? `<div class="panel" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;border-color:#25d36655">
+          <span style="font-size:34px"></span>
+          <div style="flex:1;min-width:200px"><b>Próximo passo: aprovar a sua arte</b><div class="muted" style="font-size:13.5px">Em até 1 dia útil enviamos a arte no WhatsApp ${esc(o.cliente.tel)}. Quer adiantar? Chama a gente!</div></div>
+          <a class="btn btn-wpp" target="_blank" rel="noopener" href="${wpp}">Falar no WhatsApp</a></div>` : ''}
+        <div class="panel">
+          <h3>Acompanhe seu pedido</h3>
+          <ul class="timeline">${etapas.map(([s, d], i) => `<li class="${i < nowIdx ? 'done' : i === nowIdx ? 'now' : ''}"><div><b>${s}</b><small>${esc(d)}</small></div></li>`).join('')}</ul>
+        </div>
+        <div class="panel">
+          <h3>Itens</h3>
+          ${o.itens.map(i => { const p = prodById(i.id); return `<div class="line-item"><div class="thumbbox">${fotoHTML(p, i.perso)}</div><div><b>${esc(i.nome)}</b><div class="meta">${CORES[i.cor].nome} · ${MODELOS[i.modelo].nome} · <b>${i.tamanho}</b></div><div class="meta">${persoResumo(i)}</div></div><div class="right"><b>${BRL(i.unit * i.qtd)}</b><span class="muted">${i.qtd}x</span></div></div>`; }).join('')}
+        </div>
+      </div>
+      <div class="panel summary">
+        <h3>Pedido #${o.id}</h3>
+        <span class="status ${o.status}">${pago ? 'Pago' : 'Aguardando pagamento'}</span>
+        <div class="totals" style="margin-top:16px">
+          <div><span>Subtotal</span><span>${BRL(t.sub)}</span></div>
+          ${t.desc ? `<div class="disc"><span>Cupom ${esc(o.cupom)}</span><span>− ${BRL(t.desc)}</span></div>` : ''}
+          <div><span>Frete (${esc(o.frete.nome)})</span><span>${t.frete ? BRL(t.frete) : 'Grátis'}</span></div>
+          ${t.pix ? `<div class="disc"><span>Desconto Pix</span><span>− ${BRL(t.pix)}</span></div>` : ''}
+          <div class="grand"><span>Total</span><span>${BRL(t.total)}</span></div>
+        </div>
+        <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+        <div class="muted" style="font-size:13.5px;display:grid;gap:10px">
+          <div><b style="color:var(--text)">Pagamento</b><br>${o.metodo === 'pix' ? 'Pix' : o.metodo === 'boleto' ? 'Boleto' : `${esc(o.pagamento.bandeira)} final ${o.pagamento.final} · ${o.pagamento.parcelas}x de ${BRL(t.total / o.pagamento.parcelas)}`}</div>
+          <div><b style="color:var(--text)">Entrega</b><br>${esc(o.entrega.rua)}, ${esc(o.entrega.num)}${o.entrega.comp ? ', ' + esc(o.entrega.comp) : ''}<br>${esc(o.entrega.bairro)} · ${esc(o.entrega.cidade)}/${esc(o.entrega.uf)} · ${mask.cep(o.entrega.cep)}<br>${esc(o.frete.nome)} · ${esc(o.frete.prazo)}</div>
+          <div><b style="color:var(--text)">Cliente</b><br>${esc(o.cliente.nome)}<br>${esc(o.cliente.email)} · ${esc(o.cliente.tel)}</div>
+        </div>
+        <a class="btn btn-ghost btn-block" href="#/" style="margin-top:18px">Voltar à loja</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+function persoTexto(i) {
+  const p = prodById(i.id);
+  const parts = (p.personalizacao || []).filter(f => f.tipo !== 'file' && i.perso?.[f.campo]).map(f => `${f.label.replace(/\s*\(.*\)/, '')}: ${i.perso[f.campo]}`);
+  if (i.perso?.obs) parts.push(`Obs: ${i.perso.obs}`);
+  return parts.length ? ` (${parts.join(', ')})` : '';
+}
+
+function afterOrderRender(id) {
+  const o = orders.find(x => x.id === id);
+  clearInterval(pixTimer);
+  if (!o || o.status === 'pago' || o.metodo !== 'pix') return;
+  const qr = $('#qr');
+  if (window.QRCode) new QRCode(qr, { text: o.pix.payload, width: 196, height: 196, correctLevel: QRCode.CorrectLevel.M });
+  else qr.innerHTML = '<span style="color:#111;font-size:12px;text-align:center">Use o código<br>copia e cola</span>';
+  const tick = () => {
+    const ms = o.pix.expira - Date.now();
+    const el = $('#pixTimer');
+    if (!el) return clearInterval(pixTimer);
+    if (ms <= 0) { el.textContent = 'Expirado'; clearInterval(pixTimer); return; }
+    el.textContent = `${String(Math.floor(ms / 60000)).padStart(2, '0')}:${String(Math.floor(ms / 1000) % 60).padStart(2, '0')}`;
+  };
+  tick();
+  pixTimer = setInterval(tick, 1000);
+}
+
+/* ----- meus pedidos ----- */
+function pageOrders() {
+  return `<div class="wrap" style="padding-bottom:60px">
+    <div class="page-title"><h1>Meus pedidos</h1><p class="muted">Pedidos feitos neste aparelho. Para pedidos antigos ou de outro aparelho, chame no WhatsApp com o número do pedido.</p></div>
+    <form class="panel" data-form="track" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+      <input name="id" placeholder="Número do pedido (ex.: BBS123456)" style="flex:1;min-width:200px;background:var(--bg-2);border:1.5px solid var(--line);border-radius:10px;padding:12px" aria-label="Número do pedido">
+      <button class="btn btn-gold">Acompanhar</button>
+    </form>
+    <div class="panel">${orders.length ? orders.map(o => `<div class="order-row">
+      <div><b>#${o.id}</b><div class="muted" style="font-size:13px">${new Date(o.criado).toLocaleDateString('pt-BR')} · ${o.itens.reduce((s, i) => s + i.qtd, 0)} item(ns) · ${BRL(o.totais.total)}</div></div>
+      <span class="status ${o.status}">${o.status === 'pago' ? 'Pago' : 'Aguardando pagamento'}</span>
+      <a class="btn btn-ghost" href="#/pedido/${o.id}">Ver pedido</a></div>`).join('') : `<div class="empty"><span class="e"></span>Você ainda não fez pedidos neste aparelho.</div>`}</div>
+  </div>`;
+}
+
+/* ----- ajuda ----- */
+function pageHelp(sec = 'faq') {
+  const secs = { faq: 'Perguntas frequentes', medidas: 'Tabela de medidas', trocas: 'Trocas e devoluções', privacidade: 'Privacidade' };
+  const content = {
+    faq: `<h2>Perguntas frequentes</h2>
+      ${[
+        ['Como funciona a personalização?', 'Você preenche nome, número, ano ou envia a foto na página do produto e vê uma prévia na hora. Depois do pagamento, nossa equipe cria a arte final e envia no seu WhatsApp para aprovação. Só produzimos depois do seu OK.'],
+        ['Qual o prazo?', `Produção em ${CONFIG.prazoProducao} após a aprovação da arte, mais o prazo de entrega escolhido no checkout.`],
+        ['Quais as formas de pagamento?', `Pix com ${CONFIG.pixDesconto * 100}% de desconto e aprovação na hora, cartão de crédito em até ${CONFIG.parcelasSemJuros}x sem juros ou boleto bancário.`],
+        ['Vocês fazem uniforme para times?', 'Sim! A partir de 10 peças temos desconto progressivo e arte com escudo. Chame no WhatsApp para orçamento.'],
+        ['A estampa sai na lavagem?', 'Não. Usamos DTF de alta durabilidade. Lave do avesso em água fria e não passe ferro sobre a estampa.'],
+        ['Posso pedir uma arte que não está no site?', 'Pode! Mande sua ideia no WhatsApp que fazemos um orçamento de arte exclusiva.'],
+      ].map(([q, a]) => `<details class="acc"><summary>${q}</summary><p>${a}</p></details>`).join('')}`,
+    medidas: `<h2>Tabela de medidas</h2><p class="muted">Medidas da peça em centímetros. Compare com uma camiseta que você já usa e gosta, esticada numa superfície plana.</p>
+      <h3>Adulto</h3><table class="sizes-t"><tr><th>Tamanho</th><th>Largura</th><th>Altura</th></tr><tr><td>P</td><td>50</td><td>70</td></tr><tr><td>M</td><td>53</td><td>72</td></tr><tr><td>G</td><td>56</td><td>74</td></tr><tr><td>GG</td><td>59</td><td>76</td></tr><tr><td>XG</td><td>62</td><td>78</td></tr></table>
+      <h3>Baby look</h3><table class="sizes-t"><tr><th>Tamanho</th><th>Largura</th><th>Altura</th></tr><tr><td>P</td><td>42</td><td>60</td></tr><tr><td>M</td><td>44</td><td>62</td></tr><tr><td>G</td><td>46</td><td>64</td></tr><tr><td>GG</td><td>48</td><td>66</td></tr></table>
+      <h3>Infantil</h3><table class="sizes-t"><tr><th>Tamanho</th><th>Idade</th><th>Largura</th><th>Altura</th></tr><tr><td>2</td><td>1–2 anos</td><td>30</td><td>40</td></tr><tr><td>4</td><td>3–4 anos</td><td>33</td><td>44</td></tr><tr><td>6</td><td>5–6 anos</td><td>36</td><td>48</td></tr><tr><td>8</td><td>7–8 anos</td><td>39</td><td>52</td></tr><tr><td>10</td><td>9–10 anos</td><td>42</td><td>56</td></tr><tr><td>12</td><td>11–12 anos</td><td>45</td><td>60</td></tr><tr><td>14</td><td>13–14 anos</td><td>47</td><td>64</td></tr></table>
+      <p class="muted" style="font-size:13px">Medidas de referência: confirme com o fornecedor das malhas antes de publicar.</p>`,
+    trocas: `<h2>Trocas e devoluções</h2>
+      <p>Como cada peça é feita sob encomenda com a sua personalização, <b>produtos personalizados não podem ser devolvidos por arrependimento</b> (exceção prevista no art. 49 do CDC para itens feitos sob medida). Por isso, enviamos a arte para você aprovar antes de produzir.</p>
+      <p><b>Trocamos sem custo</b> em caso de defeito de fabricação ou erro nosso na personalização (nome, número ou arte diferente do aprovado). Fale com a gente em até 7 dias após o recebimento, com fotos da peça.</p>
+      <p>Produtos <b>sem personalização</b> podem ser devolvidos em até 7 dias após o recebimento, sem uso e com etiqueta, com reembolso integral.</p>
+      <p class="muted" style="font-size:13px">Texto modelo: revisar com o contador/advogado antes de publicar.</p>`,
+    privacidade: `<h2>Privacidade</h2>
+      <p>Usamos seus dados (nome, e-mail, CPF, telefone e endereço) apenas para processar o pedido, emitir nota fiscal, entregar e falar com você sobre a arte. Não vendemos nem compartilhamos seus dados, exceto com a transportadora e o meio de pagamento, nos limites necessários.</p>
+      <p>Os dados de cartão são processados diretamente pelo meio de pagamento e não ficam armazenados na loja. Você pode pedir a exclusão dos seus dados a qualquer momento pelo WhatsApp ou e-mail ${esc(CONFIG.email)}, conforme a LGPD.</p>`,
+  };
+  return `<div class="wrap"><div class="page-title"><h1>Ajuda</h1></div>
+    <div class="help"><nav>${Object.entries(secs).map(([k, v]) => `<a href="#/ajuda/${k}" class="${sec === k ? 'active' : ''}">${v}</a>`).join('')}
+      <a target="_blank" rel="noopener" href="${waLink('Olá! Preciso de ajuda.')}" style="color:#25d366">Falar no WhatsApp</a></nav>
+    <div class="panel">${content[sec] || content.faq}</div></div></div>`;
+}
+
+function page404() {
+  return `<div class="wrap"><div class="empty" style="padding:100px 0"><span class="e"></span><h2>Página não encontrada</h2><br><a class="btn btn-gold" href="#/">Voltar à loja</a></div></div>`;
+}
+
+/* ---------- roteador ---------- */
+function route() {
+  const [path, query] = location.hash.slice(1).split('?');
+  const parts = (path || '/').split('/').filter(Boolean);
+  const qs = new URLSearchParams(query || '');
+  closeDrawers();
+  clearInterval(pixTimer);
+  clearInterval(heroTimer);
+  let html, after;
+  switch (parts[0]) {
+    case undefined: html = pageHome(); after = heroStart; break;
+    case 'c': html = pageList(parts[1] || 'todos', qs.get('q')); break;
+    case 'busca': html = pageList('todos', qs.get('q')); break;
+    case 'p': html = pageProduct(parts[1]); after = () => sel && prodById(parts[1]) && refreshProduct(); break;
+    case 'sacola': html = pageCart(); break;
+    case 'checkout': html = pageCheckout(); break;
+    case 'pedido': html = pageOrder(parts[1]); after = () => afterOrderRender(parts[1]); break;
+    case 'pedidos': html = pageOrders(); break;
+    case 'ajuda': html = pageHelp(parts[1]); break;
+    default: html = page404();
+  }
+  app.innerHTML = html;
+  after && after();
+  window.Melhorias?.rota(parts);
+  $$('.nav a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#/' + parts.slice(0, 2).join('/')));
+  window.scrollTo(0, 0);
+  document.title = titleFor(parts) + ' | BBS Store';
+}
+
+function titleFor(parts) {
+  if (parts[0] === 'p') return prodById(parts[1])?.nome || 'Produto';
+  if (parts[0] === 'c') return catById(parts[1])?.nome || 'Camisetas';
+  return { sacola: 'Sacola', checkout: 'Checkout', pedido: 'Pedido', pedidos: 'Meus pedidos', ajuda: 'Ajuda' }[parts[0]] || 'Camisetas Personalizadas';
+}
+
+function rerender() {
+  const scroll = window.scrollY;
+  route();
+  window.scrollTo(0, scroll);
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener('click', async e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const a = el.dataset.action, v = el.dataset.v;
+  switch (a) {
+    case 'closedrawer': closeDrawers(); break;
+    case 'cor': sel.cor = v; refreshProduct(); break;
+    case 'modelo': sel.modelo = v; refreshProduct(); break;
+    case 'tam': sel.tamanho = v; refreshProduct(); break;
+    case 'herogo': heroGo(+v); heroStart(); heroIdx = +v; break;
+    case 'car': { const tr = $('#' + el.dataset.t); tr.scrollBy({ left: +el.dataset.d * tr.clientWidth * .8, behavior: 'smooth' }); break; }
+    case 'pqty': sel.qtd = Math.max(1, Math.min(50, sel.qtd + +el.dataset.d)); refreshProduct(); break;
+    case 'add': if (addSelToCart()) { toast('Adicionado à sacola ✓'); openDrawer(); } break;
+    case 'buynow': if (addSelToCart()) location.hash = '#/checkout'; break;
+    case 'qty': {
+      const it = cart[+el.dataset.i];
+      it.qtd += +el.dataset.d;
+      if (it.qtd < 1) cart.splice(+el.dataset.i, 1);
+      saveCart(); refreshCartViews(); break;
+    }
+    case 'rm': cart.splice(+el.dataset.i, 1); saveCart(); refreshCartViews(); toast('Item removido'); break;
+    case 'rmcoupon': coupon = null; saveCart(); refreshCartViews(); break;
+    case 'ckstep': ck.step = +v; saveCk(); rerender(); break;
+    case 'metodo': e.preventDefault(); ck.metodo = v; saveCk(); rerender(); break;
+    case 'finalizar': el.disabled = true; await finalizar(); break;
+    case 'copy': {
+      const inp = $('#' + el.dataset.target);
+      try { await navigator.clipboard.writeText(inp.value); } catch { inp.select(); document.execCommand('copy'); }
+      toast('Código copiado ✓'); break;
+    }
+    case 'simpay': {
+      const o = orders.find(x => x.id === v);
+      marcarPago(o, o.metodo === 'pix' ? 'Pix' : 'Boleto');
+      rerender(); window.scrollTo(0, 0); break;
+    }
+  }
+});
+
+function refreshCartViews() {
+  if ($('#drawer').classList.contains('open')) renderDrawer();
+  const r = location.hash.split('/')[1];
+  if (r === 'sacola' || r === 'checkout') rerender();
+}
+
+document.addEventListener('input', async e => {
+  const t = e.target;
+  if (t.dataset.mask) t.value = mask[t.dataset.mask](t.value);
+  if (t.dataset.perso && sel) { sel.perso[t.dataset.perso] = t.value; if (t.value) t.closest('.field')?.classList.remove('invalid'); refreshProduct(); }
+  if (t.name === 'num' && t.closest('[data-form="card"]')) $('#brand').textContent = cardBrand(t.value);
+  if (t.closest('.field.invalid')) t.closest('.field').classList.remove('invalid');
+  if (t.dataset.actionInput === 'cep' && digits(t.value).length === 8) await cepLookup(t.form);
+});
+
+document.addEventListener('change', async e => {
+  const t = e.target;
+  if (t.dataset.action === 'sort') { sessionSort = t.value; rerender(); }
+  if (t.dataset.actionChange === 'frete') {
+    const fretes = opcoesFrete(ck.entrega);
+    ck.frete = fretes.find(f => f.id === t.value); saveCk();
+    $('#freteOps').innerHTML = fretesHTML(fretes);
+    $('#ckSummary').innerHTML = ckSummaryHTML(totals());
+  }
+  if (t.dataset.persoFile) {
+    const file = t.files[0];
+    if (!file) return;
+    try {
+      sel.perso.fotoData = await resizeImage(file);
+      sel.perso.foto = file.name;
+      $('#upPrev').innerHTML = `<img src="${sel.perso.fotoData}" alt="Foto enviada">`;
+      t.closest('.field').classList.remove('invalid');
+      refreshProduct();
+    } catch { toast('Não consegui ler essa imagem. Tente outra.'); }
+  }
+});
+
+async function cepLookup(form) {
+  const cep = form.elements.cep.value;
+  const box = $('#addrFields');
+  const end = await buscaCep(cep);
+  if (!end) { setFieldErr(form, 'cep', true); box.hidden = true; return; }
+  setFieldErr(form, 'cep', false);
+  ['rua', 'bairro', 'cidade', 'uf'].forEach(k => { if (end[k]) form.elements[k].value = end[k]; });
+  ck.entrega = { ...ck.entrega, ...end, cep: digits(cep) };
+  ck.frete = null;
+  box.hidden = false;
+  $('#freteOps').innerHTML = fretesHTML(opcoesFrete(ck.entrega));
+  $('#ckSummary').innerHTML = ckSummaryHTML(totals());
+  (end.rua ? form.elements.num : form.elements.rua).focus();
+}
+
+document.addEventListener('submit', async e => {
+  const f = e.target;
+  const kind = f.dataset.form;
+  if (!kind && f.id !== 'searchForm') return;
+  e.preventDefault();
+
+  if (f.id === 'searchForm') {
+    const q = $('#searchInput').value.trim();
+    if (q) location.hash = `#/busca?q=${encodeURIComponent(q)}`;
+    return;
+  }
+  if (kind === 'coupon') {
+    const code = f.elements.code.value.trim().toUpperCase();
+    const c = CONFIG.cupons[code];
+    if (!c) return toast('Cupom inválido');
+    if (c.minimo && subtotal() < c.minimo) return toast(`Cupom válido para compras acima de ${BRL(c.minimo)}`);
+    coupon = code; saveCart(); refreshCartViews(); toast('Cupom aplicado ');
+  }
+  if (kind === 'shipcalc') {
+    const cep = f.elements.cep.value;
+    const res = $('#shipRes');
+    if (!valid.cep(cep)) return toast('Digite um CEP válido');
+    res.innerHTML = '<div class="muted">Calculando…</div>';
+    const end = await buscaCep(cep);
+    if (!end) { res.innerHTML = '<div style="color:var(--err)">CEP não encontrado</div>'; return; }
+    window.Melhorias?.cepCalculado(cep, end);
+    res.innerHTML = (end.cidade ? `<span class="muted">${esc(end.cidade)}/${esc(end.uf)}</span>` : '') +
+      opcoesFrete(end).map(o => `<div><span><b>${esc(o.nome)}</b> <span class="muted">· ${esc(o.prazo)}</span>${window.Melhorias?.chegaAte(o.prazo) || ''}</span><b>${o.valor ? BRL(o.valor) : 'Grátis'}</b></div>`).join('') +
+      `<span class="muted" style="font-size:12px">PAC grátis em compras acima de ${BRL(CONFIG.freteGratisAcima)}</span>`;
+  }
+  if (kind === 'ck1') {
+    const d = Object.fromEntries(new FormData(f));
+    const ok = [
+      setFieldErr(f, 'email', !valid.email(d.email)),
+      setFieldErr(f, 'nome', !valid.nome(d.nome)),
+      setFieldErr(f, 'cpf', !valid.cpf(d.cpf)),
+      setFieldErr(f, 'tel', !valid.tel(d.tel)),
+    ].every(Boolean);
+    if (!ok) return;
+    ck.cliente = { ...d, nome: d.nome.trim(), email: d.email.trim().toLowerCase() };
+    ck.step = 2; saveCk(); rerender();
+  }
+  if (kind === 'ck2') {
+    const d = Object.fromEntries(new FormData(f));
+    if ($('#addrFields').hidden) { setFieldErr(f, 'cep', true); return; }
+    const ok = [
+      setFieldErr(f, 'cep', !valid.cep(d.cep)),
+      setFieldErr(f, 'rua', !d.rua.trim()),
+      setFieldErr(f, 'num', !d.num.trim()),
+      setFieldErr(f, 'bairro', !d.bairro.trim()),
+      setFieldErr(f, 'cidade', !d.cidade.trim()),
+      setFieldErr(f, 'uf', d.uf.trim().length !== 2),
+    ].every(Boolean);
+    if (!ok) return;
+    ck.entrega = { cep: digits(d.cep), rua: d.rua.trim(), num: d.num.trim(), comp: d.comp.trim(), bairro: d.bairro.trim(), cidade: d.cidade.trim(), uf: d.uf.trim().toUpperCase() };
+    const fretes = opcoesFrete(ck.entrega);
+    ck.frete = fretes.find(x => x.id === (d.frete || ck.frete?.id)) || fretes[0];
+    ck.step = 3; saveCk(); rerender();
+  }
+  if (kind === 'card') {
+    const btn = f.querySelector('button');
+    btn.disabled = true;
+    await finalizar(f);
+    if (document.body.contains(btn)) btn.disabled = false;
+  }
+  if (kind === 'track') {
+    const id = f.elements.id.value.trim().toUpperCase().replace('#', '');
+    if (orders.find(o => o.id === id)) location.hash = `#/pedido/${id}`;
+    else toast('Pedido não encontrado neste aparelho. Chame no WhatsApp ');
+  }
+});
+
+/* ---------- inicialização ---------- */
+function initChrome() {
+  const links = `<a href="#/c/todos">Todas</a>` + CATEGORIAS.map(c => `<a href="#/c/${c.id}">${c.nome}</a>`).join('');
+  $('#nav').innerHTML = links;
+  $('#mobileNav').innerHTML = `<a href="#/">Início</a>${links}<a href="#/pedidos">Meus pedidos</a><a href="#/ajuda">Ajuda</a>`;
+  $('#footerCats').innerHTML = CATEGORIAS.map(c => `<li><a href="#/c/${c.id}">${c.nome}</a></li>`).join('');
+  const wpp = waLink('Olá! Vim pelo site da BBS Store ');
+  $('#footerWpp').href = wpp;
+  $('#wppFloat').href = wpp;
+  $('#year').textContent = new Date().getFullYear();
+  $('#cartBtn').addEventListener('click', openDrawer);
+  $('#drawerClose').addEventListener('click', closeDrawers);
+  $('#drawerBackdrop').addEventListener('click', closeDrawers);
+  $('#menuBtn').addEventListener('click', () => { $('#mobileMenu').classList.add('open'); $('#mobileMenu').setAttribute('aria-hidden', 'false'); $('#drawerBackdrop').hidden = false; });
+  $('#mobileClose').addEventListener('click', closeDrawers);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawers(); });
+  updateCartCount();
+}
+
+window.addEventListener('hashchange', route);
+initChrome();
+route();
+
+
+</script>
+</body>
+</html>
