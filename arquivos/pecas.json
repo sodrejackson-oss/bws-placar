@@ -1,0 +1,226 @@
+[
+  {
+    "id": "t01",
+    "arquivo": "trabalhos/t01.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "pacote"
+  },
+  {
+    "id": "t02",
+    "arquivo": "trabalhos/t02.webp",
+    "largura": 1200,
+    "altura": 800,
+    "proporcao": 1.5,
+    "motivo": "cartoes"
+  },
+  {
+    "id": "t03",
+    "arquivo": "trabalhos/t03.webp",
+    "largura": 900,
+    "altura": 1200,
+    "proporcao": 0.75,
+    "motivo": "cartaz"
+  },
+  {
+    "id": "t04",
+    "arquivo": "trabalhos/t04.webp",
+    "largura": 900,
+    "altura": 1200,
+    "proporcao": 0.75,
+    "motivo": "livro"
+  },
+  {
+    "id": "t05",
+    "arquivo": "trabalhos/t05.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "garrafa"
+  },
+  {
+    "id": "t06",
+    "arquivo": "trabalhos/t06.webp",
+    "largura": 1200,
+    "altura": 900,
+    "proporcao": 1.3333,
+    "motivo": "placa"
+  },
+  {
+    "id": "t07",
+    "arquivo": "trabalhos/t07.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "cardapio"
+  },
+  {
+    "id": "t08",
+    "arquivo": "trabalhos/t08.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "sacola"
+  },
+  {
+    "id": "t09",
+    "arquivo": "trabalhos/t09.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "tela"
+  },
+  {
+    "id": "t10",
+    "arquivo": "trabalhos/t10.webp",
+    "largura": 900,
+    "altura": 1200,
+    "proporcao": 0.75,
+    "motivo": "garrafa"
+  },
+  {
+    "id": "t11",
+    "arquivo": "trabalhos/t11.webp",
+    "largura": 1200,
+    "altura": 1200,
+    "proporcao": 1,
+    "motivo": "selo"
+  },
+  {
+    "id": "t12",
+    "arquivo": "trabalhos/t12.webp",
+    "largura": 1200,
+    "altura": 800,
+    "proporcao": 1.5,
+    "motivo": "especime"
+  },
+  {
+    "id": "t13",
+    "arquivo": "trabalhos/t13.webp",
+    "largura": 1200,
+    "altura": 900,
+    "proporcao": 1.3333,
+    "motivo": "fachada"
+  },
+  {
+    "id": "t14",
+    "arquivo": "trabalhos/t14.webp",
+    "largura": 1200,
+    "altura": 800,
+    "proporcao": 1.5,
+    "motivo": "ceramica"
+  },
+  {
+    "id": "t15",
+    "arquivo": "trabalhos/t15.webp",
+    "largura": 1200,
+    "altura": 800,
+    "proporcao": 1.5,
+    "motivo": "revista"
+  },
+  {
+    "id": "t16",
+    "arquivo": "trabalhos/t16.webp",
+    "largura": 1200,
+    "altura": 900,
+    "proporcao": 1.3333,
+    "motivo": "papelaria"
+  },
+  {
+    "id": "t17",
+    "arquivo": "trabalhos/t17.webp",
+    "largura": 900,
+    "altura": 1200,
+    "proporcao": 0.75,
+    "motivo": "cartaz"
+  },
+  {
+    "id": "t18",
+    "arquivo": "trabalhos/t18.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "tela"
+  },
+  {
+    "id": "t19",
+    "arquivo": "trabalhos/t19.webp",
+    "largura": 1200,
+    "altura": 1200,
+    "proporcao": 1,
+    "motivo": "azulejo"
+  },
+  {
+    "id": "t20",
+    "arquivo": "trabalhos/t20.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "pote"
+  },
+  {
+    "id": "t21",
+    "arquivo": "trabalhos/t21.webp",
+    "largura": 900,
+    "altura": 1200,
+    "proporcao": 0.75,
+    "motivo": "sinal"
+  },
+  {
+    "id": "t22",
+    "arquivo": "trabalhos/t22.webp",
+    "largura": 1200,
+    "altura": 1200,
+    "proporcao": 1,
+    "motivo": "selo"
+  },
+  {
+    "id": "t23",
+    "arquivo": "trabalhos/t23.webp",
+    "largura": 900,
+    "altura": 1200,
+    "proporcao": 0.75,
+    "motivo": "livro"
+  },
+  {
+    "id": "t24",
+    "arquivo": "trabalhos/t24.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "vaso"
+  },
+  {
+    "id": "t25",
+    "arquivo": "trabalhos/t25.webp",
+    "largura": 1000,
+    "altura": 1250,
+    "proporcao": 0.8,
+    "motivo": "caixa"
+  },
+  {
+    "id": "t26",
+    "arquivo": "trabalhos/t26.webp",
+    "largura": 1200,
+    "altura": 800,
+    "proporcao": 1.5,
+    "motivo": "ingressos"
+  },
+  {
+    "id": "t27",
+    "arquivo": "trabalhos/t27.webp",
+    "largura": 1200,
+    "altura": 900,
+    "proporcao": 1.3333,
+    "motivo": "caderno"
+  },
+  {
+    "id": "t28",
+    "arquivo": "trabalhos/t28.webp",
+    "largura": 900,
+    "altura": 1200,
+    "proporcao": 0.75,
+    "motivo": "cartaz"
+  }
+]

@@ -1,0 +1,42 @@
+:root {
+  /* cor */
+  --fundo: #f2f0eb;
+  --texto: #141414;
+  --secundario: #5d5b56;
+  --fio: #dcd8cf;
+  --pilula: #ffffff;
+  --terracota: #d9653b;
+  --mata: #2f4a3a;
+  --grade: #a9a49a;
+  --papel: #f7f5f0;
+  --fundo-82: rgb(242 240 235 / 0.82);
+  --fundo-92: rgb(242 240 235 / 0.92);
+
+  /* letra */
+  --fonte: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --peso: 400;
+  --peso-medio: 500;
+  --tracking-cliente: -0.045em;
+  --tracking-manifesto: -0.035em;
+  --t-rotulo: 13px;
+  --t-frase-hero: clamp(24px, 2.9vw, 52px);
+  --t-cliente-case: clamp(56px, 8.4vw, 150px);
+  --t-manifesto: clamp(40px, 5.5vw, 92px);
+  --t-titulo-metodo: clamp(32px, 3.3vw, 56px);
+  --t-titulo-indice: clamp(44px, 5.4vw, 92px);
+  --t-cliente-indice: clamp(26px, 2.9vw, 46px);
+  --t-depoimento: clamp(28px, 2.7vw, 46px);
+
+  /* espaço */
+  --margem: clamp(16px, 2.2vw, 32px);
+  --secao: clamp(96px, 14vw, 220px);
+  --pilula-h: 32px;
+  --raio: 999px;
+
+  /* movimento */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 760px) {
+  :root { --pilula-h: 30px; }
+}

@@ -1,0 +1,46 @@
+.metodo { --quadro-h: min(58svh, 52vw); }
+.metodo__palco {
+  height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: clamp(20px, 3.4svh, 40px);
+  padding: calc(var(--margem) + 40px) var(--margem) var(--margem); overflow: hidden;
+}
+.metodo__titulo { text-wrap: balance; font-size: var(--t-titulo-metodo); font-weight: var(--peso); letter-spacing: -0.035em; line-height: 1.05; }
+.metodo__janela { width: 100%; }
+.metodo__tira { display: flex; width: max-content; will-change: transform; }
+.metodo__quadro {
+  width: calc(var(--quadro-h) * 0.75); height: var(--quadro-h); flex: none; overflow: hidden;
+  opacity: 0.72; transition: opacity .5s var(--ease); background: var(--fio);
+}
+.metodo__quadro.is-ativo { opacity: 1; }
+.metodo__quadro img, .metodo__quadro svg { width: 100%; height: 100%; object-fit: cover; }
+.metodo__svg .grade line { stroke: var(--grade); stroke-width: 0.4; opacity: 0.6; }
+.metodo__svg .construcao circle, .metodo__svg .construcao line { fill: none; stroke: var(--grade); stroke-width: 0.8; }
+.metodo__svg .construcao .forte { stroke-dasharray: 3 3; }
+.metodo__svg .marca path { fill: var(--mata); stroke: #f7f5f0; stroke-width: 8; paint-order: stroke; }
+
+.regua { position: relative; padding-top: 10px; }
+.regua__fio { height: 1px; background: var(--fio); }
+.regua__fio span { display: block; height: 100%; background: var(--texto); transform-origin: 0 50%; transform: scaleX(0); }
+.regua__etapas { position: relative; height: 64px; }
+.regua__etapa {
+  position: absolute; top: 0; left: calc(var(--i) * 100% / 3);
+  display: grid; gap: 6px; padding-top: 12px; color: var(--secundario); font-size: 13px;
+  transition: color .3s var(--ease);
+}
+.regua__etapa:last-child { left: auto; right: 0; text-align: right; justify-items: end; }
+.regua__marca { position: absolute; top: -6px; left: 0; width: 1px; height: 6px; background: var(--secundario); transition: height .3s var(--ease), top .3s var(--ease), background-color .3s; }
+.regua__etapa:last-child .regua__marca { left: auto; right: 0; }
+.regua__frase { color: var(--texto); font-size: clamp(13px, 1.05vw, 16px); opacity: 0; transform: translateY(6px); transition: opacity .35s var(--ease), transform .35s var(--ease); white-space: nowrap; }
+.regua__etapa.is-ativa { color: var(--texto); }
+.regua__etapa.is-ativa .regua__marca { height: 14px; top: -14px; background: var(--texto); }
+.regua__etapa.is-ativa .regua__frase { opacity: 1; transform: none; }
+
+.regua__legenda { display: none; }
+
+@media (max-width: 760px) {
+  .metodo { --quadro-h: min(56svh, 96vw); }
+  .regua__etapas { height: 40px; }
+  .regua__nome { white-space: nowrap; }
+  .regua__etapa:not(.is-ativa) .regua__palavra { display: none; }
+  .regua__frase { display: none; }
+  .regua__legenda { display: block; font-size: 15px; min-height: 2.6em; }
+}

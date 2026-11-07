@@ -1,0 +1,22 @@
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--margem);
+  transition: transform .5s var(--ease);
+}
+.nav::before {
+  content: ''; position: absolute; inset: 0 0 -40px 0; z-index: -1;
+  background: linear-gradient(var(--fundo) 0%, var(--fundo-92) 45%, rgb(242 240 235 / 0) 100%);
+  opacity: 0; transition: opacity .4s var(--ease);
+  pointer-events: none;
+}
+.nav.is-veu::before { opacity: 1; }
+.nav.is-escondida { transform: translateY(-110%); }
+.nav.is-escondida::before { opacity: 0; }
+.nav__marca { width: 104px; display: block; }
+.nav__lista { display: flex; gap: 6px; }
+@media (max-width: 760px) {
+  .nav__marca { width: 88px; }
+  .nav__lista { gap: 4px; }
+  .nav .pilula { padding: 0 11px; }
+}

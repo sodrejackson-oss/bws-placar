@@ -1,0 +1,41 @@
+.estudio { padding: var(--secao) var(--margem); }
+.estudio__pagina { position: relative; display: grid; grid-template-columns: 73% 27%; }
+.estudio__coluna { padding-right: clamp(24px, 3vw, 56px); }
+.estudio__texto {
+  margin-top: 28px;
+  font-size: var(--t-manifesto); line-height: 1.08; letter-spacing: var(--tracking-manifesto);
+  font-weight: var(--peso);
+}
+.palavra { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.palavra > span { display: inline-block; }
+.palavra--foto { vertical-align: baseline; overflow: visible; }
+.foto-linha {
+  display: inline-block; position: relative; width: 2.5em; height: 0.82em;
+  border-radius: 0.12em; overflow: hidden; vertical-align: -0.06em; background: var(--fio);
+}
+.foto-linha img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); transform: scale(1.6); transform-origin: var(--pos, 50% 50%); }
+
+.estudio__margem { border-left: 1px solid var(--texto); position: relative; }
+.estudio__margem ul { position: absolute; inset: 0; }
+.nota {
+  position: absolute; left: clamp(20px, 2.4vw, 40px); right: 0;
+  font-size: clamp(13px, 1.1vw, 19px); line-height: 1.2;
+  display: flex; align-items: center; gap: 10px;
+}
+.nota__ponto { width: 7px; height: 7px; border-radius: 50%; background: var(--texto); flex: none; }
+.nota[data-nota="desenhamos"] .nota__ponto { background: var(--terracota); }
+
+.estudio__fios { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.estudio__fios path { fill: none; stroke: var(--texto); stroke-width: 1; }
+
+.estudio__equipe { display: flex; gap: 10px; margin-top: clamp(40px, 5vw, 72px); }
+.estudio__equipe li { width: 24px; height: 24px; border-radius: 50%; background: var(--cor); }
+
+@media (max-width: 760px) {
+  .estudio__pagina { grid-template-columns: 1fr; }
+  .estudio__coluna { padding-right: 0; }
+  .estudio__margem { border-left: 0; border-top: 1px solid var(--texto); margin-top: 40px; padding-top: 20px; }
+  .estudio__margem ul { position: static; display: grid; gap: 10px; }
+  .nota { position: static; }
+  .estudio__fios { display: none; }
+}
