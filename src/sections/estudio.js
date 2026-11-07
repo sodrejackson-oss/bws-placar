@@ -1,4 +1,5 @@
 import './estudio.css';
+import { arquivo } from '../data/caminho.js';
 
 // Quebra o texto em palavras animáveis. {a:id} marca a palavra que ancora uma nota.
 const palavras = (txt) => txt.split(' ').filter(Boolean).map((w) => {
@@ -27,9 +28,9 @@ export const estudio = () => `
       <p class="estudio__texto" data-manifesto>
         ${palavras('Somos seis {pessoas}pessoas numa casa no Poço da Panela.')}
         ${palavras('{desenhamos}Desenhamos marcas para quem faz coisas com as')}
-        ${foto('mãos', '/trabalhos/sol.webp', '30% 62%')}<span class="palavra" data-ancora="dois-pontos"><span>:</span></span>
+        ${foto('mãos', arquivo('trabalhos/sol.webp'), '30% 62%')}<span class="palavra" data-ancora="dois-pontos"><span>:</span></span>
         ${palavras('café,')}
-        ${foto('cerâmica', '/trabalhos/t24.webp', '50% 52%')}${palavras(', livro, cadeira, festa.')}
+        ${foto('cerâmica', arquivo('trabalhos/t24.webp'), '50% 52%')}${palavras(', livro, cadeira, festa.')}
       </p>
       <ul class="estudio__equipe" aria-label="Seis pessoas no estúdio">
         ${equipe.map((c) => `<li style="--cor:${c}" data-bolinha></li>`).join('')}

@@ -4,6 +4,7 @@ import {
 } from 'three';
 import pecas from '../data/pecas.json';
 import { casos } from '../data/casos.js';
+import { arquivo } from '../data/caminho.js';
 
 const FUNDO = '#f2f0eb';
 const NUM_PLANOS = 78;
@@ -79,7 +80,7 @@ export function criarCena(canvas, { reduzido = false, ponteiroFino = false } = {
       if (c < 0.15 && s < 0.15) ang += Math.PI;
     }
     const peca = pecas[i % pecas.length];
-    const mesh = new Mesh(geo, materialComVies(textura('/' + peca.arquivo)));
+    const mesh = new Mesh(geo, materialComVies(textura(arquivo(peca.arquivo))));
     mesh.scale.set(alt * peca.proporcao, alt, 1);
     mesh.position.z = z;
     mesh.rotation.x = Math.sin(ang) * 0.28;
@@ -92,7 +93,7 @@ export function criarCena(canvas, { reduzido = false, ponteiroFino = false } = {
   // —— destaques ——
   const angDestaque = [0.55, 2.55, 3.95, 5.65];
   const destaques = casos.map((c, i) => {
-    const mesh = new Mesh(geo, materialComVies(textura(`/trabalhos/${c.id}.webp`)));
+    const mesh = new Mesh(geo, materialComVies(textura(arquivo(`trabalhos/${c.id}.webp`))));
     mesh.userData = { ang: angDestaque[i], raio: 4.1, z: c.z };
     mesh.position.z = c.z;
     scene.add(mesh);

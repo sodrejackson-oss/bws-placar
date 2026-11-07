@@ -1,4 +1,5 @@
 import './metodo.css';
+import { arquivo } from '../data/caminho.js';
 
 const etapas = [
   { n: '01', nome: 'Escuta', frase: 'Antes de desenhar, três semanas ouvindo quem faz.' },
@@ -29,10 +30,10 @@ const grade = () => {
 };
 
 const quadros = [
-  `<img src="/trabalhos/metodo-rascunho.webp" alt="Rascunho a lápis das três meias-luas em papel manteiga" loading="lazy" width="900" height="1200" />`,
+  `<img src="${arquivo('trabalhos/metodo-rascunho.webp')}" alt="Rascunho a lápis das três meias-luas em papel manteiga" loading="lazy" width="900" height="1200" />`,
   grade(),
-  `<img src="/trabalhos/metodo-sistema.webp" alt="Prancha do sistema: marca, cores e letra" loading="lazy" width="900" height="1200" />`,
-  `<img src="/trabalhos/metodo-rua.webp" alt="Sacos de café Torra Alta na prateleira" loading="lazy" width="900" height="1200" />`,
+  `<img src="${arquivo('trabalhos/metodo-sistema.webp')}" alt="Prancha do sistema: marca, cores e letra" loading="lazy" width="900" height="1200" />`,
+  `<img src="${arquivo('trabalhos/metodo-rua.webp')}" alt="Sacos de café Torra Alta na prateleira" loading="lazy" width="900" height="1200" />`,
 ];
 
 export const metodo = () => `

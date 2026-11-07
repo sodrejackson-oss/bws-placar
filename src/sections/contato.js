@@ -1,5 +1,6 @@
 import './contato.css';
 import wordmark from '../brand/margem.svg?raw';
+import { arquivo } from '../data/caminho.js';
 
 // [foto, x %, y %, profundidade 0 (longe) a 1 (perto)]
 const flutuantes = [
@@ -12,7 +13,7 @@ const flutuantes = [
 export const contato = () => `
 <section class="depoimento" aria-label="Depoimento">
   <div class="depoimento__campo" aria-hidden="true">
-    ${flutuantes.map(([f, x, y, z]) => `<img class="flutua" data-prof="${z}" src="/trabalhos/${f}.webp" alt="" loading="lazy"
+    ${flutuantes.map(([f, x, y, z]) => `<img class="flutua" data-prof="${z}" src="${arquivo(`trabalhos/${f}.webp`)}" alt="" loading="lazy"
       style="--x:${x}%;--y:${y}%;--z:${z}" />`).join('')}
   </div>
   <figure class="depoimento__citacao">

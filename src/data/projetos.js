@@ -17,8 +17,10 @@ const linhas = [
   [2019, 'Casa Cajá', 'Identidade', 'Fortaleza', 'identidade', 't25'],
 ];
 
+import { arquivo } from './caminho.js';
+
 export const projetos = linhas.map(([ano, cliente, disciplina, cidade, filtro, foto]) => ({
-  ano, cliente, disciplina, cidade, filtro, foto: `/trabalhos/${foto}.webp`,
+  ano, cliente, disciplina, cidade, filtro, foto: arquivo(`trabalhos/${foto}.webp`),
 }));
 
 export const totalProjetos = 41;
