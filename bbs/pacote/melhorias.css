@@ -1,0 +1,129 @@
+/* ============================================================
+   BBS Store: estilos das melhorias de conversão
+   ============================================================ */
+
+/* —— galeria em abas: Foto | Sua camisa em 3D —— */
+.gal[data-aba] { grid-template-columns: minmax(0, 1fr); width: min(100%, calc((100vh - 210px) * 0.8)); }
+@media (max-width: 760px) { .gal[data-aba] { width: 100%; } }
+.gal[data-aba] .gal-i { grid-column: 1; grid-row: 2; }
+.gal[data-aba] .gal-i .gal-m { aspect-ratio: 4 / 5; }
+.gal[data-aba="foto"] .gal-i[data-v="3d"],
+.gal[data-aba="3d"] .gal-i[data-v="foto"] { visibility: hidden; pointer-events: none; }
+.gal[data-aba] .gal-i figcaption { display: none; }
+.gal-abas { grid-row: 1; align-self: start; display: inline-flex; gap: 4px; padding: 4px; background: var(--bg-2); border-radius: 999px; justify-self: start; }
+.gal-abas button { border: 0; background: none; padding: 9px 16px; border-radius: 999px; font-weight: 700; font-size: 14px; color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.gal-abas button[aria-selected="true"] { background: #fff; color: var(--text); box-shadow: 0 2px 8px #0000001a; }
+.gal-abas .bolinha { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 0 3px #f5961f33; }
+
+/* —— camisa 3D —— */
+.gal-i[data-v="3d"] .gal-m { position: relative; padding: 0; background: radial-gradient(circle at 50% 38%, #fbfaf7, #e9e6df 78%); }
+.c3d { position: absolute; inset: 0; }
+.c3d-palco { position: absolute; inset: 0; cursor: grab; }
+.c3d-palco:active { cursor: grabbing; }
+.c3d-palco canvas { width: 100% !important; height: 100% !important; display: block; }
+.c3d::after { content: ''; position: absolute; left: 22%; right: 22%; bottom: 6%; height: 5%; border-radius: 50%; background: radial-gradient(closest-side, #0000002e, #0000); z-index: -1; }
+.c3d-carregando { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; color: var(--muted); transition: opacity .3s; pointer-events: none; }
+.c3d.ok .c3d-carregando { opacity: 0; }
+.c3d-lados { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); display: inline-flex; gap: 4px; padding: 4px; background: #ffffffd9; backdrop-filter: blur(8px); border-radius: 999px; box-shadow: 0 4px 14px #0000001a; }
+.c3d-lados button { border: 0; background: none; padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 13px; cursor: pointer; color: var(--muted); }
+.c3d-lados button[aria-pressed="true"] { background: var(--text); color: #fff; }
+.c3d-dica { position: absolute; top: 12px; right: 14px; font-size: 12px; color: var(--muted); background: #ffffffb3; padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+
+/* no celular, enquanto digita: a camisa flutua no canto */
+.c3d.flutua { position: fixed; inset: auto; top: 76px; right: 10px; width: 132px; height: 150px; z-index: 60; border-radius: 16px; background: radial-gradient(circle at 50% 38%, #fbfaf7, #e9e6df 78%); box-shadow: 0 12px 30px #0000003d; }
+.c3d.flutua { visibility: visible; }
+.c3d.flutua .c3d-carregando, .c3d.flutua ~ .c3d-dica { display: none; }
+
+/* —— prazo com data —— */
+.entrega-prev { display: flex; gap: 10px; align-items: flex-start; margin: 14px 0 4px; padding: 12px 14px; background: #178a4c0f; border: 1px solid #178a4c33; border-radius: 12px; font-size: 14px; line-height: 1.45; }
+.entrega-prev .ic { font-size: 16px; line-height: 1.3; }
+.entrega-prev b { color: var(--ok); }
+.link { background: none; border: 0; padding: 0; color: var(--gold); font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
+.ship-res .chega { color: var(--ok); font-weight: 700; white-space: nowrap; }
+
+/* —— recomendador de tamanho —— */
+.tam-link { margin-left: 12px; }
+.tam-ajuda { margin-top: 10px; padding: 14px; border: 1.5px dashed var(--line); border-radius: 12px; background: var(--bg-2); }
+.tam-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+.tam-form label { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--muted); flex: 1; min-width: 96px; }
+.tam-form input, .tam-form select { background: #fff; border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; font: inherit; color: var(--text); width: 100%; }
+.tam-form .btn { padding: 11px 16px; }
+.tam-ok { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 12px; font-size: 14px; }
+.tam-ok b { font-size: 18px; color: var(--gold); }
+.tam-ok a { color: var(--gold); text-decoration: underline; }
+.tam-ok .btn { padding: 10px 18px; }
+.sizes.chamar { animation: chamar .5s; }
+@keyframes chamar { 0%, 100% { transform: none; } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+.sizes.chamar .size { border-color: var(--err); }
+
+/* —— mandar a prévia —— */
+.btn-previa { width: 100%; margin-top: 10px; gap: 10px; }
+.btn-previa svg { color: #25d366; }
+
+/* —— barra de compra fixa (celular) —— */
+.barra-compra { display: none; }
+@media (max-width: 760px) {
+  .barra-compra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; gap: 12px; align-items: center; justify-content: space-between; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -8px 24px #0000001a; transform: translateY(110%); transition: transform .3s; }
+  .barra-compra.on { transform: none; }
+  .barra-compra .bc-preco { display: grid; line-height: 1.2; }
+  .barra-compra .bc-preco b { font-size: 16px; color: var(--ok); }
+  .barra-compra .bc-preco small { font-size: 12px; color: var(--muted); }
+  .barra-compra .btn { padding: 13px 18px; flex: none; }
+  body.cta-na-tela .wpp-float { opacity: 0; pointer-events: none; transform: scale(.6); }
+  body.com-barra .wpp-float { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) { .barra-compra { transition: none; } .sizes.chamar { animation: none; } }
+
+/* —— sacola: completar o frete grátis —— */
+.completa { margin: 12px 0 4px; padding: 12px; border-radius: 12px; background: #f5961f0f; border: 1px solid #f5961f33; }
+.completa-t { font-size: 13px; margin-bottom: 8px; }
+.completa-t b { color: var(--ok); }
+.completa-i { display: grid; grid-template-columns: 44px 1fr auto; gap: 10px; align-items: center; padding: 6px; border-radius: 10px; }
+.completa-i:hover { background: #ffffffb3; }
+.completa-f { width: 44px; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; display: block; background: var(--bg-2); }
+.completa-f .foto { width: 100%; height: 100%; object-fit: cover; }
+.completa-i b { display: block; font-size: 13.5px; }
+.completa-i small { color: var(--ok); font-size: 12.5px; font-weight: 700; }
+.completa-s { font-size: 13px; color: var(--gold); font-weight: 700; }
+
+/* —— kit do time —— */
+.kit.kit-aberto { display: block; }
+.kit-topo { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.kit-ano { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--muted); max-width: 180px; margin-bottom: 10px; }
+.kit-ano input, .kit-l input, .kit-l select, .kit-colar textarea { background: var(--bg-2); border: 1.5px solid var(--line); border-radius: 8px; padding: 9px 10px; font: inherit; font-size: 14px; color: var(--text); width: 100%; min-width: 0; }
+.kit-l { display: grid; grid-template-columns: minmax(0, 1.6fr) 56px minmax(0, 1.2fr) 30px; gap: 6px; align-items: center; margin-bottom: 6px; }
+.kit-tabela:not(:has(input[data-k="numero"])) .kit-l { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr) 30px; }
+.kit-cab { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
+.kit-rm { border: 0; background: none; color: var(--muted); cursor: pointer; height: 34px; border-radius: 8px; }
+.kit-rm:hover { background: var(--bg-2); color: var(--err); }
+.kit-acoes { display: flex; gap: 10px; align-items: start; flex-wrap: wrap; margin: 8px 0 12px; }
+.kit-acoes .btn { padding: 9px 16px; }
+.kit-colar { flex: 1; min-width: 200px; font-size: 14px; }
+.kit-colar summary { cursor: pointer; color: var(--gold); font-weight: 600; padding: 9px 0; }
+.kit-colar textarea { margin: 6px 0; resize: vertical; }
+.kit-resumo { border-top: 1px solid var(--line); padding-top: 12px; display: grid; gap: 8px; }
+.kit-num { display: flex; justify-content: space-between; align-items: baseline; }
+.kit-num b { font-size: 20px; }
+.kit-off { color: var(--ok); font-weight: 700; font-size: 14px; }
+.kit-falta { font-size: 13.5px; color: var(--gold); font-weight: 600; }
+
+/* —— modal —— */
+.m-modal { position: fixed; inset: 0; z-index: 100; background: #0009; display: grid; place-items: center; padding: 16px; }
+.m-modal[hidden] { display: none; }
+.m-caixa { position: relative; background: #fff; border-radius: 18px; padding: 22px; width: min(440px, 100%); max-height: calc(100vh - 32px); overflow: auto; }
+.m-fechar { position: absolute; top: 10px; right: 10px; }
+.m-corpo { display: grid; gap: 12px; }
+.previa-img { width: 100%; border-radius: 12px; }
+
+/* —— início: fotos em profundidade —— */
+.d-b { position: relative; isolation: isolate; align-self: stretch; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 420px; }
+.prof { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.prof img { position: absolute; left: var(--x); top: var(--y); width: calc(44px + 64px * var(--z)); aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px;
+  opacity: calc(.28 + .62 * var(--z)); filter: blur(calc((1 - var(--z)) * 3.5px)); box-shadow: 0 10px 24px #0003; will-change: transform; }
+.d-b::before { content: ''; position: absolute; inset: 22% -6%; z-index: -1; background: radial-gradient(closest-side, #fff 55%, #fff0); }
+@media (max-width: 760px) { .d-b { min-height: 380px; } .prof img { width: calc(36px + 48px * var(--z)); } }
+
+/* —— início: foto que segue o cursor —— */
+.cursor-foto { position: fixed; left: 0; top: 0; z-index: 45; width: 170px; aspect-ratio: 4 / 5; margin: 0; pointer-events: none; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 44px #0006; opacity: 0; scale: .7; transition: opacity .25s, scale .3s; }
+.cursor-foto.on { opacity: 1; scale: 1; }
+.cursor-foto img { width: 100%; height: 100%; object-fit: cover; }

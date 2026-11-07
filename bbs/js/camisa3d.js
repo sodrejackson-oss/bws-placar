@@ -11137,4 +11137,5 @@ function qs(e, { shape: t, frente: n, costas: r, aoInteragir: i } = {}) {
 		}
 	};
 }
+window.BBS3D = { criarCamisa3D: qs }, window.dispatchEvent(new Event("bbs3d-pronto"));
 export { qs as criarCamisa3D };

@@ -206,6 +206,18 @@ const Melhorias = (() => {
     c3d.cena && c3d.cena.atualizar();
   }
 
+  // O módulo 3D pode vir colado no HTML (<script type="module" data-bbs3d>) ou como arquivo js/camisa3d.js.
+  function carregar3D() {
+    if (window.BBS3D) return Promise.resolve(window.BBS3D);
+    if (document.querySelector('script[data-bbs3d]')) {
+      return new Promise((ok) => addEventListener('bbs3d-pronto', () => ok(window.BBS3D), { once: true }));
+    }
+    // a página ainda está carregando: a tag do 3D pode estar mais abaixo no HTML
+    if (document.readyState === 'loading') {
+      return new Promise((ok) => document.addEventListener('DOMContentLoaded', ok, { once: true })).then(carregar3D);
+    }
+    return import('./camisa3d.js');
+  }
   function montar3D(p) {
     const fig = document.querySelector('.gal-i[data-v="3d"]');
     if (!fig || fig.dataset.pronta) return;
@@ -224,14 +236,15 @@ const Melhorias = (() => {
     redesenhar();
     fontes.then(redesenhar);
     const palco = m.querySelector('.c3d-palco');
-    c3d.carregando = import('./camisa3d.js').then(({ criarCamisa3D }) => {
+    c3d.carregando = carregar3D().then(({ criarCamisa3D }) => {
       if (!document.body.contains(palco)) return;
       c3d.cena = criarCamisa3D(palco, {
         shape: shape(), frente: c3d.frente, costas: c3d.costas,
         aoInteragir: () => track('view_3d', { item_id: p.id }),
       });
       m.querySelector('.c3d').classList.add('ok');
-    }).catch(() => {
+    }).catch((erro) => {
+      console.warn('[BBS] camisa 3D indisponível, usando as prévias planas:', erro);
       // sem 3D: volta para as prévias planas
       webgl = false; delete fig.dataset.pronta; refreshProductCompleto();
     });
@@ -284,7 +297,7 @@ const Melhorias = (() => {
     const luz = x.createRadialGradient(W / 2, 560, 50, W / 2, 560, 620);
     luz.addColorStop(0, '#f5961f40'); luz.addColorStop(1, '#f5961f00');
     x.fillStyle = luz; x.fillRect(0, 0, W, H);
-    const logo = imagem('img/logo.png');
+    const logo = imagem(document.querySelector('.logo-img')?.src || ''); // a logo da própria página
     if (logo) x.drawImage(logo, 70, 64, 110, 110);
     x.fillStyle = '#fff'; x.font = '800 54px Sora, Figtree, sans-serif'; x.textAlign = 'left';
     x.fillText(p.nome, 210, 118);
@@ -598,7 +611,7 @@ const Melhorias = (() => {
       ['eu-escolhi-ser-goleiro', 60, 90, 0.2],
     ];
     sec.insertAdjacentHTML('afterbegin', `<div class="prof" aria-hidden="true">${fotos.map(([f, x, y, z]) =>
-      `<img src="img/${f}.webp" alt="" loading="lazy" style="--x:${x}%;--y:${y}%;--z:${z}" data-z="${z}">`).join('')}</div>`);
+      `<img src="${prodById(f)?.foto || ''}" alt="" loading="lazy" style="--x:${x}%;--y:${y}%;--z:${z}" data-z="${z}">`).join('')}</div>`);
     if (reduzido) return;
     const imgsP = [...sec.querySelectorAll('.prof img')];
     let pend = 0;
@@ -617,7 +630,8 @@ const Melhorias = (() => {
     const bar = document.querySelector('.ocasiao');
     if (!bar || !ponteiroFino || bar.dataset.cursor) return;
     bar.dataset.cursor = '1';
-    const fotos = ['img/pet-personalizada.webp', 'img/colecao-posicao.webp', 'img/liesf-prensa.webp'];
+    // presente, time, liga: fotos dos produtos e a da prensa que já está na página
+    const fotos = [prodById('pet-personalizada')?.foto, prodById('colecao-posicao')?.foto, document.querySelector('.destaque .d-a')?.src || prodById('camera-narracao-emocao')?.foto];
     const fig = document.createElement('figure');
     fig.className = 'cursor-foto'; fig.setAttribute('aria-hidden', 'true');
     fig.innerHTML = '<img alt="">';

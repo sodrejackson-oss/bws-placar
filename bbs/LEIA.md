@@ -61,3 +61,8 @@ Abrir o arquivo direto (`file://`) não carrega o 3D.
 ## Gerar `js/camisa3d.js` de novo
 Depois de mudar `fonte/camisa3d.js`, na raiz do repositório:
 `npx vite build --config bbs/fonte/vite.config.js`
+
+## Levar para outra versão do site
+A pasta `pacote/` tem o prompt (`PROMPT.md`), as instruções de encaixe (`ganchos.md`) e os três arquivos
+(`melhorias.js`, `melhorias.css` e `camisa3d.js`, que baixa o Three.js do jsDelivr). Funciona com o site
+num HTML único ou em arquivos separados.

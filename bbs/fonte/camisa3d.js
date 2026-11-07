@@ -181,3 +181,8 @@ export function criarCamisa3D(alvo, { shape, frente, costas, aoInteragir } = {})
     },
   };
 }
+
+// Também disponível sem import, para quando este arquivo vai colado no HTML
+// como <script type="module" data-bbs3d>.
+window.BBS3D = { criarCamisa3D };
+window.dispatchEvent(new Event('bbs3d-pronto'));
